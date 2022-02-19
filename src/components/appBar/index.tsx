@@ -2,10 +2,11 @@ import React from 'react';
 import MuiAppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Header from '../header';
-import Button from '../button';
+import Header from '../Header';
+import Button from '../Button';
+import { Link } from 'react-router-dom';
 
-const AppBar: React.FC = () => {
+const AppBar = () => {
   return (
     <Box>
       <MuiAppBar position='static'>
@@ -14,7 +15,9 @@ const AppBar: React.FC = () => {
           sx={{ display: 'flex', justifyContent: 'flex-end' }}
         >
           <Header />
-          <Button text='Login' color='secondary' />
+          <Link className='link-button' to='/login'>
+            <Button text='Login' color='secondary' />
+          </Link>
         </Toolbar>
       </MuiAppBar>
     </Box>

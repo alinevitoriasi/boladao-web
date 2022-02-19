@@ -2,18 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
 
-const Header: React.FC = () => {
+const Header = () => {
   return (
     <div>
       <nav>
         <Link className='link-button' to='/'>
           Inicio
         </Link>
-        <Link className='link-button' to='/sobre'>
-          Sobre
+        <Link className='link-button' to='/posts'>
+          Posts
         </Link>
-        <Link className='link-button' to='/contato'>
-          Contato
+        <Link className='link-button' to='/novopost'>
+          Novo Post
         </Link>
       </nav>
     </div>

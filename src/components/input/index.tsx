@@ -7,7 +7,7 @@ interface IInput {
   sx?: SxProps<Theme>;
 }
 
-const Input: React.FC<IInput> = ({ label, variant, sx }) => {
+const Input = ({ label, variant, sx }: IInput) => {
   return <TextField sx={sx} label={label} variant={variant} />;
 };
 

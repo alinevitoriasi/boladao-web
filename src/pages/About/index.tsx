@@ -1,12 +1,10 @@
 import React from 'react';
+import { Grid } from '@mui/material';
+
 import './style.css';
 
-const About: React.FC = () => {
-  return (
-    <div>
-      <p>Sobre boladão</p>
-    </div>
-  );
+const About = () => {
+  return <Grid container></Grid>;
 };
 
 export default About;
