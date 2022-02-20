@@ -1,14 +1,16 @@
 import React from 'react';
 import MuiButton from '@mui/material/Button';
 import { ButtonTypeMap, Stack, SxProps, Theme } from '@mui/material';
+
 interface IButton {
   text: string;
   color?: ButtonTypeMap['props']['color'];
   size?: ButtonTypeMap['props']['size'];
   sx?: SxProps<Theme>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const Button = ({ text, color, size, sx }: IButton) => {
+const Button = ({ text, color, size, sx, onClick }: IButton) => {
   return (
     <Stack>
       <MuiButton
@@ -16,6 +18,7 @@ const Button = ({ text, color, size, sx }: IButton) => {
         variant='contained'
         color={color || 'primary'}
         size={size}
+        onClick={onClick}
       >
         {text}
       </MuiButton>
