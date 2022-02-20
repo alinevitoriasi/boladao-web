@@ -10,17 +10,26 @@ import {
 interface ITextBox {
   sx?: SxProps<Theme>;
   label?: string;
-  variant: TextFieldProps['variant'];
+  variant?: TextFieldProps['variant'];
   maxRows?: number;
   rows?: number;
+  placeholder?: string;
 }
 
-const TextBox = ({ label, variant, sx, rows, maxRows }: ITextBox) => {
+const TextBox = ({
+  label,
+  variant,
+  sx,
+  rows,
+  maxRows,
+  placeholder,
+}: ITextBox) => {
   return (
     <FormControl fullWidth>
       <TextField
         multiline
         sx={sx}
+        placeholder={placeholder}
         label={label}
         rows={rows}
         maxRows={maxRows}
