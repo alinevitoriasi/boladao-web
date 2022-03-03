@@ -1,10 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Grid, Box } from '@mui/material';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 
+interface IFormFields {
+  email: string;
+  senha: string;
+}
+
 const SignUp = () => {
+  const [campos, setCampos] = useState<IFormFields>({
+    email: '',
+    senha: '',
+  });
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const name = e.target.name as keyof IFormFields;
+    setCampos({ ...campos, [name]: e.target.value });
+  };
+
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(campos);
+  };
+
   return (
     <Grid
       container
@@ -26,25 +48,36 @@ const SignUp = () => {
         <h1 style={{ color: '#0B1D51', textAlign: 'center' }}>
           Cadastro Boladaço
         </h1>
-        <Input
-          sx={{
-            width: '100%',
-            marginBottom: 2,
-            borderRadius: 2,
-          }}
-          label='E-mail'
-          variant='outlined'
-        />
-        <Input
-          sx={{
-            width: '100%',
-            marginBottom: 2,
-            borderRadius: 2,
-          }}
-          label='Senha'
-          variant='outlined'
-        />
-        <Button color='secondary' size='large' text='Cadastrar' />
+        <form onSubmit={handleFormSubmit}>
+          <Input
+            sx={{
+              width: '100%',
+              marginBottom: 2,
+              borderRadius: 2,
+            }}
+            label='E-mail'
+            variant='outlined'
+            name='email'
+            onChange={handleInputChange}
+          />
+          <Input
+            sx={{
+              width: '100%',
+              marginBottom: 2,
+              borderRadius: 2,
+            }}
+            name='senha'
+            label='Senha'
+            variant='outlined'
+            onChange={handleInputChange}
+          />
+          <Button
+            type='submit'
+            color='secondary'
+            size='large'
+            text='Cadastrar'
+          />
+        </form>
       </Box>
     </Grid>
   );
