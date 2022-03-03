@@ -1,14 +1,21 @@
-import { SxProps, TextField, TextFieldProps, Theme } from '@mui/material';
 import React from 'react';
+import { TextField, TextFieldProps } from '@mui/material';
 
-interface IInput {
-  label: string;
-  variant: TextFieldProps['variant'];
-  sx?: SxProps<Theme>;
-}
+type IInput = TextFieldProps & {
+  label: JSX.Element | string;
+};
 
-const Input = ({ label, variant, sx }: IInput) => {
-  return <TextField sx={sx} label={label} variant={variant} />;
+const Input = ({ name, label, variant, sx, type, onChange }: IInput) => {
+  return (
+    <TextField
+      name={name}
+      sx={sx}
+      label={label}
+      variant={variant}
+      onChange={onChange}
+      type={type}
+    />
+  );
 };
 
 export default Input;

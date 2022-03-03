@@ -33,11 +33,11 @@ const App = () => {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/sobre' element={<About />} />
-            <Route path='/contato' element={<Contact />} />
+            <Route path='/contato/:id' element={<Contact />} />
             <Route path='/novopost' element={<NewPosts />} />
             <Route path='/posts' element={<Posts />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/signup' element={<SignUp />} />
+            <Route path='/cadastrar' element={<SignUp />} />
           </Routes>
         </Box>
       </ThemeProvider>
