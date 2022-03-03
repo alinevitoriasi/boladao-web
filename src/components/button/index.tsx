@@ -7,10 +7,11 @@ interface IButton {
   color?: ButtonTypeMap['props']['color'];
   size?: ButtonTypeMap['props']['size'];
   sx?: SxProps<Theme>;
+  type?: 'submit' | 'reset' | 'button' | undefined;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const Button = ({ text, color, size, sx, onClick }: IButton) => {
+const Button = ({ text, color, size, sx, type, onClick }: IButton) => {
   return (
     <Stack>
       <MuiButton
@@ -19,6 +20,7 @@ const Button = ({ text, color, size, sx, onClick }: IButton) => {
         color={color || 'primary'}
         size={size}
         onClick={onClick}
+        type={type}
       >
         {text}
       </MuiButton>

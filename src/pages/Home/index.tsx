@@ -25,7 +25,7 @@ const Home = () => {
             est.Praesent vel viverra nisi. Mauris aliquet nunc non turpis
             scelerisque, eget.
           </p>
-          <Link to='/signup'>
+          <Link to='/cadastrar'>
             <Button
               sx={{
                 height: '50px',
