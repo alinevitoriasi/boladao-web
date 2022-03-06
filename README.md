@@ -56,6 +56,7 @@ npm start
 | 🐞 : beetle :  | Correção de erros      |
 |  🔥  : fire :   | Remover arquivo            |
   |🎨 : art :    | Customização          |
+  |📝:pencil:  | Estudos          |
 
 
 
