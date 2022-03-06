@@ -20,7 +20,8 @@ Em construção... 🚧🚧🚧
 - [x] Tela de Login
 - [x] Tela de Cadastro
 - [x] Tela de Post
-- [ ] Tela de criação de Post
+- [x] Tela de criação de Post
+- [x] Adicionou o [React Hook Form](https://react-hook-form.com/) ao projeto.
 - [ ] ....
 
 
