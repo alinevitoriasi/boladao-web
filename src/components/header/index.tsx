@@ -9,9 +9,11 @@ const Header = () => {
         <Link className='link-button' to='/'>
           Inicio
         </Link>
+        <span>|</span>
         <Link className='link-button' to='/posts'>
           Posts
         </Link>
+        <span>|</span>
         <Link className='link-button' to='/novopost'>
           Novo Post
         </Link>

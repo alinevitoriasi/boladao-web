@@ -12,16 +12,44 @@ import SignUp from './pages/SignUp';
 import NewPosts from './pages/NewPosts';
 import Posts from './pages/Posts';
 
+declare module '@mui/material/styles' {
+  interface Theme {
+    status: {
+      danger: string;
+    };
+  }
+  interface ThemeOptions {
+    status?: {
+      danger?: string;
+    };
+  }
+}
+
 const App = () => {
   const appTheme = createTheme({
     spacing: 4,
+
+    components: {
+      MuiTypography: {
+        defaultProps: {
+          color: '#110E2E',
+        },
+      },
+    },
+
+    status: {
+      danger: '#0B1D51',
+    },
     palette: {
       primary: {
-        main: '#0B1D51',
-      },
-      secondary: {
         main: '#6A49D8',
       },
+      secondary: {
+        main: '#1c1464',
+      },
+    },
+    typography: {
+      fontFamily: ['Montserrat'].join(','),
     },
   });
 
@@ -29,7 +57,7 @@ const App = () => {
     <BrowserRouter>
       <ThemeProvider theme={appTheme}>
         <AppBar />
-        <Box sx={{ backgroundColor: '#f6f6f6', height: '100vh' }}>
+        <Box sx={{ backgroundColor: '#FFFFFF', height: '100vh' }}>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/sobre' element={<About />} />

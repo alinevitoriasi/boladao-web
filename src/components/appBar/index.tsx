@@ -13,7 +13,7 @@ const AppBar = () => {
 
   return (
     <Box>
-      <MuiAppBar position='static'>
+      <MuiAppBar color='transparent' position='static' sx={{ paddingTop: 3 }}>
         <Toolbar
           variant='dense'
           sx={{ display: 'flex', justifyContent: 'flex-end' }}

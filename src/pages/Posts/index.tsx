@@ -5,7 +5,7 @@ import Card from '../../components/Card';
 
 const Posts = () => {
   return (
-    <Grid container>
+    <Grid container sx={{ paddingLeft: 15, paddingRight: 15 }}>
       <Grid item md={6} sm={12}>
         <Card
           text='Mussum Ipsum, cacilds vidis litro abertis. 
