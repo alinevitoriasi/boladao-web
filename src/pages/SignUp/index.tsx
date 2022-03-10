@@ -1,31 +1,38 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Grid, Box } from '@mui/material';
+import { Grid, Box, Typography } from '@mui/material';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import { useForm } from 'react-hook-form';
 
-interface IFormFields {
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+interface ISignUpForm {
   email: string;
   senha: string;
 }
 
+const schema = yup
+  .object({
+    email: yup.string().email('E-mail inválido').required('Campo Obrigatório'),
+    senha: yup.string().required('Campo Obrigatório'),
+  })
+  .required();
+
 const SignUp = () => {
-  const [campos, setCampos] = useState<IFormFields>({
-    email: '',
-    senha: '',
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ISignUpForm>({
+    resolver: yupResolver(schema),
   });
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    const name = e.target.name as keyof IFormFields;
-    setCampos({ ...campos, [name]: e.target.value });
+  const onSubmit = (data: ISignUpForm) => {
+    console.log('DATA', data);
   };
-
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(campos);
-  };
+  console.log(errors.email);
 
   return (
     <Grid
@@ -43,33 +50,43 @@ const SignUp = () => {
           flexDirection: 'column',
           justifyContent: 'center',
           backgroundColor: '#FFFFFF',
+          minWidth: '40%',
         }}
       >
-        <h1 style={{ color: '#0B1D51', textAlign: 'center' }}>
+        <Typography
+          variant='h4'
+          className='title'
+          sx={{ fontWeight: 800, paddingBottom: 5 }}
+        >
           Cadastro Boladaço
-        </h1>
-        <form onSubmit={handleFormSubmit}>
+        </Typography>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Input
-            sx={{
-              width: '100%',
-              marginBottom: 2,
-              borderRadius: 2,
-            }}
+            error={!!errors.email}
+            helperText={errors.email?.message || ' '}
+            control={control}
+            name='email'
             label='E-mail'
             variant='outlined'
-            name='email'
-            onChange={handleInputChange}
-          />
-          <Input
             sx={{
               width: '100%',
               marginBottom: 2,
               borderRadius: 2,
             }}
+          />
+          <Input
+            error={!!errors.email}
+            helperText={errors.email?.message || ' '}
+            control={control}
             name='senha'
             label='Senha'
             variant='outlined'
-            onChange={handleInputChange}
+            type='password'
+            sx={{
+              width: '100%',
+              marginBottom: 2,
+              borderRadius: 2,
+            }}
           />
           <Button
             type='submit'

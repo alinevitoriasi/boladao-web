@@ -5,8 +5,18 @@ import { Box } from '@mui/system';
 import TextBox from '../../components/TextBox';
 import Button from '../../components/Button';
 import Tag from '../../components/Tag';
+import { useForm } from 'react-hook-form';
 
+interface IPostForm {
+  texto: string;
+}
 const NewPosts = () => {
+  const { control, handleSubmit } = useForm<IPostForm>();
+
+  const onSubmit = (data: IPostForm) => {
+    console.log('DATA', data);
+  };
+
   return (
     <Grid
       container
@@ -45,30 +55,36 @@ const NewPosts = () => {
           color='error'
           onDelete={() => console.log('teste')}
         />
-
-        <TextBox
-          placeholder='Digite seu texto aqui'
-          rows={5}
-          sx={{
-            backgroundColor: '#ffffff',
-            borderRadius: 1,
-            marginTop: 3,
-            marginBottom: 3,
-            '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                borderColor: '#ffffff',
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <TextBox
+            label=''
+            variant='outlined'
+            name='texto'
+            control={control}
+            placeholder='Digite seu texto aqui'
+            rows={5}
+            fullWidth={true}
+            sx={{
+              backgroundColor: '#ffffff',
+              borderRadius: 1,
+              marginTop: 3,
+              marginBottom: 3,
+              width: '100%',
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: '#ffffff',
+                },
+                '&:hover fieldset': {
+                  borderColor: '#ffffff',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#ffffff',
+                },
               },
-              '&:hover fieldset': {
-                borderColor: '#ffffff',
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: '#ffffff',
-              },
-            },
-          }}
-        />
-
-        <Button text='Enviar' color='secondary' />
+            }}
+          />
+          <Button text='Enviar' color='secondary' type='submit' />
+        </form>
       </Box>
     </Grid>
   );

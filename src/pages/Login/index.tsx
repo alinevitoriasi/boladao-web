@@ -1,11 +1,37 @@
 import React from 'react';
 
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import Card from '../../components/Card';
+import { useForm } from 'react-hook-form';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+interface ILoginForm {
+  email: string;
+  senha: string;
+}
+
+const schema = yup
+  .object({
+    email: yup.string().email('E-mail inválido').required('Campo Obrigatório'),
+    senha: yup.string().required('Campo Obrigatório'),
+  })
+  .required();
 
 const Login = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ILoginForm>({ resolver: yupResolver(schema) });
+
+  const onSubmit = (data: ILoginForm) => {
+    console.log('DATA', data);
+  };
+
+  console.log(errors.email);
+
   return (
     <Grid
       container
@@ -22,30 +48,46 @@ const Login = () => {
           flexDirection: 'column',
           justifyContent: 'center',
           backgroundColor: '#FFFFFF',
+          minWidth: '40%',
         }}
       >
-        <h1 style={{ color: '#0B1D51', textAlign: 'center' }}>
+        <Typography
+          variant='h4'
+          className='title'
+          sx={{ fontWeight: 800, paddingBottom: 5 }}
+        >
           Login Boladaço
-        </h1>
-        <Input
-          sx={{
-            width: '100%',
-            marginBottom: 2,
-            borderRadius: 2,
-          }}
-          label='E-mail'
-          variant='outlined'
-        />
-        <Input
-          sx={{
-            width: '100%',
-            marginBottom: 2,
-            borderRadius: 2,
-          }}
-          label='Senha'
-          variant='outlined'
-        />
-        <Button color='secondary' size='large' text='Entrar' />
+        </Typography>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            error={!!errors.email}
+            helperText={errors.email?.message || ' '}
+            control={control}
+            name='email'
+            label='E-mail'
+            variant='outlined'
+            sx={{
+              width: '100%',
+              marginBottom: 2,
+              borderRadius: 2,
+            }}
+          />
+          <Input
+            error={!!errors.senha}
+            helperText={errors.senha?.message || ' '}
+            control={control}
+            name='senha'
+            label='Senha'
+            type='password'
+            variant='outlined'
+            sx={{
+              width: '100%',
+              marginBottom: 2,
+              borderRadius: 2,
+            }}
+          />
+          <Button color='secondary' size='large' text='Entrar' type='submit' />
+        </form>
       </Box>
     </Grid>
   );

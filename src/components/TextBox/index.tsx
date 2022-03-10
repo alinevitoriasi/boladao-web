@@ -1,20 +1,11 @@
 import React from 'react';
-import {
-  FormControl,
-  SxProps,
-  TextField,
-  TextFieldProps,
-  Theme,
-} from '@mui/material';
+import { TextField, TextFieldProps } from '@mui/material';
+import { useController } from 'react-hook-form';
 
-interface ITextBox {
-  sx?: SxProps<Theme>;
-  label?: string;
-  variant?: TextFieldProps['variant'];
-  maxRows?: number;
-  rows?: number;
-  placeholder?: string;
-}
+type ITextBox = TextFieldProps & {
+  label: JSX.Element | string;
+  control?: any;
+};
 
 const TextBox = ({
   label,
@@ -23,19 +14,32 @@ const TextBox = ({
   rows,
   maxRows,
   placeholder,
+  control,
+  name,
 }: ITextBox) => {
+  const {
+    field: { onChange, value, ref },
+  } = useController({
+    name: name || '',
+    control,
+    rules: { required: true },
+    defaultValue: '',
+  });
+
   return (
-    <FormControl fullWidth>
-      <TextField
-        multiline
-        sx={sx}
-        placeholder={placeholder}
-        label={label}
-        rows={rows}
-        maxRows={maxRows}
-        variant={variant}
-      />
-    </FormControl>
+    <TextField
+      multiline
+      sx={sx}
+      name={name}
+      label={label}
+      variant={variant}
+      onChange={onChange}
+      inputRef={ref}
+      value={value}
+      rows={rows}
+      maxRows={maxRows}
+      placeholder={placeholder}
+    />
   );
 };
 
