@@ -6,11 +6,10 @@ import TextBox from '../../components/TextBox';
 import Button from '../../components/Button';
 import Tag from '../../components/Tag';
 import { useForm } from 'react-hook-form';
-import Input from '../../components/Input';
+import api from '../../services/api';
 
 interface IPostForm {
-  name: string;
-  details: string;
+  text: string;
 }
 
 const NewPosts = () => {
@@ -18,22 +17,14 @@ const NewPosts = () => {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data: IPostForm) => {
-    console.log('New Post: ', data);
     setLoading(true);
     try {
-      await fetch('http://localhost:5000/post', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+      await api.post('/posts', data);
+      reset();
     } catch (error) {
       console.log(error);
-    } finally {
-      reset();
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   return (
@@ -85,21 +76,10 @@ const NewPosts = () => {
           />
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            control={control}
-            name='name'
-            label='Name'
-            variant='outlined'
-            sx={{
-              width: '100%',
-              marginBottom: 2,
-              borderRadius: 2,
-            }}
-          />
           <TextBox
             label=''
             variant='outlined'
-            name='details'
+            name='text'
             control={control}
             placeholder='Digite seu texto aqui'
             rows={5}
