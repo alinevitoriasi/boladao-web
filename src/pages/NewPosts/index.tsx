@@ -6,33 +6,22 @@ import TextBox from '../../components/TextBox';
 import Button from '../../components/Button';
 import Tag from '../../components/Tag';
 import { useForm } from 'react-hook-form';
-import Input from '../../components/Input';
+
+import api from '../../services/api';
 interface IPostForm {
-  name: string;
-  details: string;
+  text: string;
 }
 const NewPosts = () => {
   const { control, handleSubmit, setValue } = useForm<IPostForm>();
-
   const [state, setState] = useState(false);
+
   const onSubmit = async (data: IPostForm) => {
     setState(true);
-    try {
-      await fetch('http://localhost:5000/post', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
+    await api.post('/post', data).catch((error) => console.log(error));
+    setTimeout(() => {
       setState(false);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setValue('name', '');
-      setValue('details', '');
-    }
+      setValue('text', '');
+    }, 500);
   };
 
   return (
@@ -74,21 +63,10 @@ const NewPosts = () => {
           onDelete={() => console.log('teste')}
         />
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            control={control}
-            name='name'
-            label='Name'
-            variant='outlined'
-            sx={{
-              width: '100%',
-              marginBottom: 2,
-              borderRadius: 2,
-            }}
-          />
           <TextBox
             label=''
             variant='outlined'
-            name='details'
+            name='text'
             control={control}
             placeholder='Digite seu texto aqui'
             rows={5}

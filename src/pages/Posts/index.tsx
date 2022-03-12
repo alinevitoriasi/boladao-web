@@ -1,119 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid } from '@mui/material';
 
 import Card from '../../components/Card';
+import api from '../../services/api';
 
+interface Post {
+  _id: string;
+  text: string;
+}
 const Posts = () => {
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  useEffect(() => {
+    api
+      .get('/posts')
+      .then((response) => setPosts(response.data))
+      .catch((err) => {
+        console.error('ops! ocorreu um erro' + err);
+      });
+  }, []);
+
+  console.log(posts);
+
   return (
     <Grid container sx={{ paddingLeft: 15, paddingRight: 15 }}>
-      <Grid item md={6} sm={12}>
-        <Card
-          text='Mussum Ipsum, cacilds vidis litro abertis. 
-        Quem manda na minha terra sou euzis!Atirei o pau no gatis,
-        per gatis num morreus.Em pé sem cair, deitado sem dormir,
-        sentado sem cochilar e fazendo pose.
-        In elementis mé pra quem é amistosis quis leo.'
-        />
-      </Grid>
-      <Grid item md={6} sm={12}>
-        <Card
-          text='Mussum Ipsum, cacilds vidis litro abertis. 
-        Quem manda na minha terra sou euzis!Atirei o pau no gatis,
-        per gatis num morreus.Em pé sem cair, deitado sem dormir,
-        sentado sem cochilar e fazendo pose.
-        In elementis mé pra quem é amistosis quis leo.'
-        />
-      </Grid>
-      <Grid item md={6} sm={12}>
-        <Card
-          text='Mussum Ipsum, cacilds vidis litro abertis. 
-        Quem manda na minha terra sou euzis!Atirei o pau no gatis,
-        per gatis num morreus.Em pé sem cair, deitado sem dormir,
-        sentado sem cochilar e fazendo pose.
-        In elementis mé pra quem é amistosis quis leo.'
-        />
-      </Grid>
-      <Grid item md={6} sm={12}>
-        <Card
-          text='Mussum Ipsum, cacilds vidis litro abertis. 
-        Quem manda na minha terra sou euzis!Atirei o pau no gatis,
-        per gatis num morreus.Em pé sem cair, deitado sem dormir,
-        sentado sem cochilar e fazendo pose.
-        In elementis mé pra quem é amistosis quis leo.'
-        />
-      </Grid>
-      <Grid item md={6} sm={12}>
-        <Card
-          text='Mussum Ipsum, cacilds vidis litro abertis. 
-        Quem manda na minha terra sou euzis!Atirei o pau no gatis,
-        per gatis num morreus.Em pé sem cair, deitado sem dormir,
-        sentado sem cochilar e fazendo pose.
-        In elementis mé pra quem é amistosis quis leo.'
-        />
-      </Grid>
-      <Grid item md={6} sm={12}>
-        <Card
-          text='Mussum Ipsum, cacilds vidis litro abertis. 
-        Quem manda na minha terra sou euzis!Atirei o pau no gatis,
-        per gatis num morreus.Em pé sem cair, deitado sem dormir,
-        sentado sem cochilar e fazendo pose.
-        In elementis mé pra quem é amistosis quis leo.'
-        />
-      </Grid>
-      <Grid item md={6} sm={12}>
-        <Card
-          text='Mussum Ipsum, cacilds vidis litro abertis. 
-        Quem manda na minha terra sou euzis!Atirei o pau no gatis,
-        per gatis num morreus.Em pé sem cair, deitado sem dormir,
-        sentado sem cochilar e fazendo pose.
-        In elementis mé pra quem é amistosis quis leo.'
-        />
-      </Grid>
-      <Grid item md={6} sm={12}>
-        <Card
-          text='Mussum Ipsum, cacilds vidis litro abertis. 
-        Quem manda na minha terra sou euzis!Atirei o pau no gatis,
-        per gatis num morreus.Em pé sem cair, deitado sem dormir,
-        sentado sem cochilar e fazendo pose.
-        In elementis mé pra quem é amistosis quis leo.'
-        />
-      </Grid>
-      <Grid item md={6} sm={12}>
-        <Card
-          text='Mussum Ipsum, cacilds vidis litro abertis. 
-        Quem manda na minha terra sou euzis!Atirei o pau no gatis,
-        per gatis num morreus.Em pé sem cair, deitado sem dormir,
-        sentado sem cochilar e fazendo pose.
-        In elementis mé pra quem é amistosis quis leo.'
-        />
-      </Grid>
-      <Grid item md={6} sm={12}>
-        <Card
-          text='Mussum Ipsum, cacilds vidis litro abertis. 
-        Quem manda na minha terra sou euzis!Atirei o pau no gatis,
-        per gatis num morreus.Em pé sem cair, deitado sem dormir,
-        sentado sem cochilar e fazendo pose.
-        In elementis mé pra quem é amistosis quis leo.'
-        />
-      </Grid>
-      <Grid item md={6} sm={12}>
-        <Card
-          text='Mussum Ipsum, cacilds vidis litro abertis. 
-        Quem manda na minha terra sou euzis!Atirei o pau no gatis,
-        per gatis num morreus.Em pé sem cair, deitado sem dormir,
-        sentado sem cochilar e fazendo pose.
-        In elementis mé pra quem é amistosis quis leo.'
-        />
-      </Grid>
-      <Grid item md={6} sm={12}>
-        <Card
-          text='Mussum Ipsum, cacilds vidis litro abertis. 
-        Quem manda na minha terra sou euzis!Atirei o pau no gatis,
-        per gatis num morreus.Em pé sem cair, deitado sem dormir,
-        sentado sem cochilar e fazendo pose.
-        In elementis mé pra quem é amistosis quis leo.'
-        />
-      </Grid>
+      {posts?.map((post: Post) => {
+        return (
+          <Grid key={post._id} item md={6} sm={12}>
+            <Card text={post.text} />
+          </Grid>
+        );
+      })}
     </Grid>
   );
 };
