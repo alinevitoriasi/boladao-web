@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Grid } from '@mui/material';
 import { Box } from '@mui/system';
@@ -6,15 +6,33 @@ import TextBox from '../../components/TextBox';
 import Button from '../../components/Button';
 import Tag from '../../components/Tag';
 import { useForm } from 'react-hook-form';
-
+import Input from '../../components/Input';
 interface IPostForm {
-  texto: string;
+  name: string;
+  details: string;
 }
 const NewPosts = () => {
-  const { control, handleSubmit } = useForm<IPostForm>();
+  const { control, handleSubmit, setValue } = useForm<IPostForm>();
 
-  const onSubmit = (data: IPostForm) => {
-    console.log('DATA', data);
+  const [state, setState] = useState(false);
+  const onSubmit = async (data: IPostForm) => {
+    setState(true);
+    try {
+      await fetch('http://localhost:5000/post', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      setState(false);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setValue('name', '');
+      setValue('details', '');
+    }
   };
 
   return (
@@ -56,10 +74,21 @@ const NewPosts = () => {
           onDelete={() => console.log('teste')}
         />
         <form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            control={control}
+            name='name'
+            label='Name'
+            variant='outlined'
+            sx={{
+              width: '100%',
+              marginBottom: 2,
+              borderRadius: 2,
+            }}
+          />
           <TextBox
             label=''
             variant='outlined'
-            name='texto'
+            name='details'
             control={control}
             placeholder='Digite seu texto aqui'
             rows={5}
@@ -83,7 +112,12 @@ const NewPosts = () => {
               },
             }}
           />
-          <Button text='Enviar' color='secondary' type='submit' />
+          <Button
+            loading={state}
+            text='Enviar'
+            color='secondary'
+            type='submit'
+          />
         </form>
       </Box>
     </Grid>

@@ -1,6 +1,6 @@
 import React from 'react';
-import MuiButton from '@mui/material/Button';
 import { ButtonTypeMap, Stack, SxProps, Theme } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 interface IButton {
   text: string;
@@ -9,21 +9,24 @@ interface IButton {
   sx?: SxProps<Theme>;
   type?: 'submit' | 'reset' | 'button' | undefined;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  loading?: boolean;
 }
 
-const Button = ({ text, color, size, sx, type, onClick }: IButton) => {
+const Button = ({ text, color, size, sx, type, loading, onClick }: IButton) => {
+  console.log('loading', loading);
   return (
     <Stack>
-      <MuiButton
+      <LoadingButton
         sx={sx}
         variant='contained'
         color={color || 'primary'}
         size={size}
         onClick={onClick}
         type={type}
+        loading={loading}
       >
         {text}
-      </MuiButton>
+      </LoadingButton>
     </Stack>
   );
 };

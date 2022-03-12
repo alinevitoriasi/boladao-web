@@ -21,7 +21,6 @@ const Input = ({
   } = useController({
     name: name || '',
     control,
-    rules: { required: 'Obrigatório' },
     defaultValue: '',
   });
 

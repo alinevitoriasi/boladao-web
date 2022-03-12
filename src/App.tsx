@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { Box, createTheme, ThemeProvider } from '@mui/material';
+import type {} from '@mui/lab/themeAugmentation';
 
 import AppBar from './components/AppBar';
 
