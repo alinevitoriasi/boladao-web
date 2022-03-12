@@ -1,11 +1,10 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import './style.css';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import Button from '../../components/Button';
 
 const Contact = () => {
-  const navigate = useNavigate();
   const params = useParams();
   const [searchParams, setSearchParams] = useSearchParams({});
 

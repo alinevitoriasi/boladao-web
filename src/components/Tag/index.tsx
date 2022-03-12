@@ -1,7 +1,7 @@
 import React from 'react';
 import MuiChip from '@mui/material/Chip';
 
-import { ChipTypeMap, Stack } from '@mui/material';
+import { ChipTypeMap } from '@mui/material';
 
 interface ITag {
   label?: string;

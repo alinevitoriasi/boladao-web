@@ -13,7 +13,6 @@ interface IButton {
 }
 
 const Button = ({ text, color, size, sx, type, loading, onClick }: IButton) => {
-  console.log('loading', loading);
   return (
     <Stack>
       <LoadingButton

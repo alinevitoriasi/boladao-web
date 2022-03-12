@@ -12,7 +12,15 @@ const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <Grid container sx={{ paddingTop: 10 }}>
+    <Grid
+      container
+      sx={{
+        height: 'inherit',
+        // background: 'red',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <Grid item md={6} sm={12}>
         <Box
           sx={{

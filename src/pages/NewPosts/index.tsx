@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
 
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import TextBox from '../../components/TextBox';
 import Button from '../../components/Button';
 import Tag from '../../components/Tag';
 import { useForm } from 'react-hook-form';
 import Input from '../../components/Input';
+
 interface IPostForm {
   name: string;
   details: string;
 }
-const NewPosts = () => {
-  const { control, handleSubmit, setValue } = useForm<IPostForm>();
 
-  const [state, setState] = useState(false);
+const NewPosts = () => {
+  const { control, handleSubmit, reset } = useForm<IPostForm>();
+  const [loading, setLoading] = useState(false);
+
   const onSubmit = async (data: IPostForm) => {
-    setState(true);
+    console.log('New Post: ', data);
+    setLoading(true);
     try {
       await fetch('http://localhost:5000/post', {
         method: 'POST',
@@ -25,13 +28,11 @@ const NewPosts = () => {
         },
         body: JSON.stringify(data),
       });
-
-      setState(false);
     } catch (error) {
       console.log(error);
     } finally {
-      setValue('name', '');
-      setValue('details', '');
+      reset();
+      setLoading(false);
     }
   };
 
@@ -41,7 +42,7 @@ const NewPosts = () => {
       direction='column'
       justifyContent='center'
       alignItems='center'
-      style={{ height: '100vh' }}
+      style={{ height: 'inherit' }}
     >
       <Box
         sx={{
@@ -50,29 +51,39 @@ const NewPosts = () => {
           borderRadius: 3,
           flexDirection: 'column',
           justifyContent: 'center',
-          backgroundColor: '#DAE1E1',
+          backgroundColor: '#FFFFFF',
+          minWidth: '40%',
         }}
       >
-        <Tag
-          label='Teste'
-          color='primary'
-          onDelete={() => console.log('teste')}
-        />
-        <Tag
-          label='Teste'
-          color='secondary'
-          onDelete={() => console.log('teste')}
-        />
-        <Tag
-          label='Teste'
-          color='success'
-          onDelete={() => console.log('teste')}
-        />
-        <Tag
-          label='Teste'
-          color='error'
-          onDelete={() => console.log('teste')}
-        />
+        <Typography
+          variant='h4'
+          className='title'
+          sx={{ fontWeight: 800, paddingBottom: 5 }}
+        >
+          Nova publicação
+        </Typography>
+        <div style={{ marginBottom: 15, marginTop: 15 }}>
+          <Tag
+            label='Teste'
+            color='primary'
+            onDelete={() => console.log('teste')}
+          />
+          <Tag
+            label='Teste'
+            color='secondary'
+            onDelete={() => console.log('teste')}
+          />
+          <Tag
+            label='Teste'
+            color='success'
+            onDelete={() => console.log('teste')}
+          />
+          <Tag
+            label='Teste'
+            color='error'
+            onDelete={() => console.log('teste')}
+          />
+        </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
             control={control}
@@ -94,29 +105,18 @@ const NewPosts = () => {
             rows={5}
             fullWidth={true}
             sx={{
-              backgroundColor: '#ffffff',
               borderRadius: 1,
               marginTop: 3,
               marginBottom: 3,
               width: '100%',
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                  borderColor: '#ffffff',
-                },
-                '&:hover fieldset': {
-                  borderColor: '#ffffff',
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: '#ffffff',
-                },
-              },
             }}
           />
           <Button
-            loading={state}
-            text='Enviar'
             color='secondary'
+            size='large'
+            text='Enviar'
             type='submit'
+            loading={loading}
           />
         </form>
       </Box>
