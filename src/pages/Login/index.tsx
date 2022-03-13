@@ -38,7 +38,7 @@ const Login = () => {
       direction='column'
       justifyContent='center'
       alignItems='center'
-      style={{ height: '100vh' }}
+      style={{ height: 'inherit' }}
     >
       <Box
         sx={{

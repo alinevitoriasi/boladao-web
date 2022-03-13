@@ -7,5 +7,11 @@
   font-size: 20px;
 }
 .home-image {
-  width: 650px;
+  max-width: 650px;
+}
+
+@media screen and (max-width: 1240px) {
+  .home-image {
+    max-width: 500px;
+  }
 }

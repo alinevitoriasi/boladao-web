@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { Box, createTheme, ThemeProvider } from '@mui/material';
-import type {} from '@mui/lab/themeAugmentation';
 
 import AppBar from './components/AppBar';
 
@@ -58,7 +57,7 @@ const App = () => {
     <BrowserRouter>
       <ThemeProvider theme={appTheme}>
         <AppBar />
-        <Box sx={{ backgroundColor: '#FFFFFF', height: '100vh' }}>
+        <Box sx={{ backgroundColor: '#FFFFFF', height: '90vh' }}>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/sobre' element={<About />} />

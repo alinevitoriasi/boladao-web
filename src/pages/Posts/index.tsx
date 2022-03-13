@@ -11,19 +11,17 @@ interface Post {
 const Posts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
 
+  async function getPosts() {
+    const response = await api.get('/posts');
+    setPosts(response.data);
+  }
+
   useEffect(() => {
-    api
-      .get('/posts')
-      .then((response) => setPosts(response.data))
-      .catch((err) => {
-        console.error('ops! ocorreu um erro' + err);
-      });
+    getPosts();
   }, []);
 
-  console.log(posts);
-
   return (
-    <Grid container sx={{ paddingLeft: 15, paddingRight: 15 }}>
+    <Grid container sx={{ padding: 5 }}>
       {posts?.map((post: Post) => {
         return (
           <Grid key={post._id} item md={6} sm={12}>

@@ -1,6 +1,33 @@
+
+.__header nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.__header nav span {
+  margin: 0 10px;
+}
+
 .link-button {
   color: #2f243a;
   text-decoration: none;
-  margin-left: 20px;
-  margin-right: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transition: .5s;
+}
+
+.link-button:hover{
+  border-radius: 5px;
+  background-color: #1c1464;
+  color: white;
+}
+
+.__active{
+  border-radius: 5px;
+  background-color: #1c1464;
+  color: white;
 }
