@@ -19,7 +19,7 @@ const NewPosts = () => {
   const onSubmit = async (data: IPostForm) => {
     setLoading(true);
     try {
-      await api.post('/post', data);
+      await api.post('/posts', data);
       reset();
     } catch (error) {
       console.log(error);
