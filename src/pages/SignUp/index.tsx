@@ -7,16 +7,21 @@ import { useForm } from 'react-hook-form';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import api from '../../services/api';
 
 interface ISignUpForm {
+  username: string;
   email: string;
-  senha: string;
+  password: string;
+  password2: string;
 }
 
 const schema = yup
   .object({
+    username: yup.string().required('Campo Obrigatório'),
     email: yup.string().email('E-mail inválido').required('Campo Obrigatório'),
-    senha: yup.string().required('Campo Obrigatório'),
+    password: yup.string().required('Campo Obrigatório'),
+    password2: yup.string().required('Campo Obrigatório'),
   })
   .required();
 
@@ -29,9 +34,14 @@ const SignUp = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: ISignUpForm) => {
-    console.log('DATA', data);
+  const onSubmit = async (data: ISignUpForm) => {
+    try {
+      await api.post('/users', data);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   console.log(errors.email);
 
   return (
@@ -62,6 +72,19 @@ const SignUp = () => {
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
+            error={!!errors.username}
+            helperText={errors.username?.message || ' '}
+            control={control}
+            name='username'
+            label='Nome'
+            variant='outlined'
+            sx={{
+              width: '100%',
+              marginBottom: 2,
+              borderRadius: 2,
+            }}
+          />
+          <Input
             error={!!errors.email}
             helperText={errors.email?.message || ' '}
             control={control}
@@ -75,11 +98,25 @@ const SignUp = () => {
             }}
           />
           <Input
-            error={!!errors.email}
-            helperText={errors.email?.message || ' '}
+            error={!!errors.password}
+            helperText={errors.password?.message || ' '}
             control={control}
-            name='senha'
+            name='password'
             label='Senha'
+            variant='outlined'
+            type='password'
+            sx={{
+              width: '100%',
+              marginBottom: 2,
+              borderRadius: 2,
+            }}
+          />
+          <Input
+            error={!!errors.password2}
+            helperText={errors.password2?.message || ' '}
+            control={control}
+            name='password2'
+            label='Confirmar Senha'
             variant='outlined'
             type='password'
             sx={{
