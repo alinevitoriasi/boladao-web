@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { isAuthenticated } from '../../services/auth';
 
 import './style.css';
 
@@ -23,6 +24,7 @@ const Header = () => {
           Posts
         </Link>
         <span>|</span>
+
         <Link
           className={`link-button ${pathname === '/novopost' && '__active'}`}
           to='/novopost'
@@ -30,6 +32,19 @@ const Header = () => {
           Novo Post
         </Link>
         <span>|</span>
+
+        {isAuthenticated() && (
+          <>
+            <Link
+              className={`link-button ${pathname === '/sobre' && '__active'}`}
+              to='/sobre'
+            >
+              Sobre
+            </Link>
+            <span>|</span>
+          </>
+        )}
+
         {pathname === '/login' ? (
           <Link
             className={`link-button ${pathname === '/login' && '__active'}`}
