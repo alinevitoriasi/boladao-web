@@ -18,7 +18,7 @@ import SignUp from './pages/SignUp';
 import NewPosts from './pages/NewPosts';
 import Posts from './pages/Posts';
 import { isAuthenticated } from './services/auth';
-import NotFound from './pages/Contact';
+import NotFound from './pages/NotFound';
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -36,7 +36,6 @@ declare module '@mui/material/styles' {
 const App = () => {
   const appTheme = createTheme({
     spacing: 4,
-
     components: {
       MuiTypography: {
         defaultProps: {
@@ -44,7 +43,6 @@ const App = () => {
         },
       },
     },
-
     status: {
       danger: '#0B1D51',
     },
