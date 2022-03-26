@@ -8,6 +8,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import api from '../../services/api';
+import { login } from '../../services/auth';
+import { useNavigate } from 'react-router-dom';
 
 interface ISignUpForm {
   username: string;
@@ -26,6 +28,7 @@ const schema = yup
   .required();
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
@@ -37,6 +40,12 @@ const SignUp = () => {
   const onSubmit = async (data: ISignUpForm) => {
     try {
       await api.post('/users', data);
+      const response = await api.post('/login', {
+        email: data?.email,
+        password: data?.password,
+      });
+      login(response?.data?.token);
+      navigate('/posts');
     } catch (error) {
       console.log(error);
     }
