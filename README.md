@@ -22,6 +22,9 @@ Em construção... 🚧🚧🚧
 - [x] Tela de Post
 - [x] Tela de criação de Post
 - [x] Adicionou o [React Hook Form](https://react-hook-form.com/) ao projeto.
+- [x] Adiciona Axios ao projeto.
+- [x] Chamadas da API (Services)
+- [x] Autenticação / Criação de Rotas Privadas
 - [ ] ....
 
 
