@@ -10,14 +10,24 @@ interface IButton {
   type?: 'submit' | 'reset' | 'button' | undefined;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   loading?: boolean;
+  variant?: ButtonTypeMap['props']['variant'];
 }
 
-const Button = ({ text, color, size, sx, type, loading, onClick }: IButton) => {
+const Button = ({
+  text,
+  variant,
+  color,
+  size,
+  sx,
+  type,
+  loading,
+  onClick,
+}: IButton) => {
   return (
     <Stack>
       <LoadingButton
         sx={sx}
-        variant='contained'
+        variant={variant || 'contained'}
         color={color || 'primary'}
         size={size}
         onClick={onClick}
