@@ -60,7 +60,7 @@ const App = () => {
   });
 
   const PrivateRoute = (): JSX.Element => {
-    return <>{isAuthenticated() ? <Outlet /> : <Navigate to='/home' />}</>;
+    return <>{isAuthenticated() ? <Outlet /> : <Navigate to='/' />}</>;
   };
 
   return (
@@ -69,14 +69,13 @@ const App = () => {
         <AppBar />
         <Box sx={{ backgroundColor: '#FFFFFF', height: '90vh' }}>
           <Routes>
-            <Route path='/home' element={<Home />} />
+            <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/cadastrar' element={<SignUp />} />
-            <Route path='/posts' element={<Posts />} />
-            <Route path='/novopost' element={<NewPosts />} />
             {/* <Route path='/contato/:id' element={<Contact />} /> */}
-            <Route path='/' element={<PrivateRoute />}>
-              <Route path='/sobre' element={<About />} />
+            <Route element={<PrivateRoute />}>
+              <Route path='/posts' element={<Posts />} />
+              <Route path='/novopost' element={<NewPosts />} />
             </Route>
             <Route path='*' element={<NotFound />} />
           </Routes>

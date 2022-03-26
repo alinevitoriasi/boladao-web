@@ -7,15 +7,20 @@ import { useForm } from 'react-hook-form';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+
+import api from '../../services/api';
+import { login } from '../../services/auth';
+import { useNavigate } from 'react-router-dom';
+
 interface ILoginForm {
   email: string;
-  senha: string;
+  password: string;
 }
 
 const schema = yup
   .object({
     email: yup.string().email('E-mail inválido').required('Campo Obrigatório'),
-    senha: yup.string().required('Campo Obrigatório'),
+    password: yup.string().required('Campo Obrigatório'),
   })
   .required();
 
@@ -26,8 +31,15 @@ const Login = () => {
     formState: { errors },
   } = useForm<ILoginForm>({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data: ILoginForm) => {
-    console.log('DATA', data);
+  const navigate = useNavigate();
+  const onSubmit = async (data: ILoginForm) => {
+    try {
+      const response = await api.post('/login', data);
+      login(response?.data?.token);
+      navigate('/posts');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   console.log(errors.email);
@@ -73,10 +85,10 @@ const Login = () => {
             }}
           />
           <Input
-            error={!!errors.senha}
-            helperText={errors.senha?.message || ' '}
+            error={!!errors.password}
+            helperText={errors.password?.message || ' '}
             control={control}
-            name='senha'
+            name='password'
             label='Senha'
             type='password'
             variant='outlined'
