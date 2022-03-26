@@ -13,7 +13,7 @@ interface ISignUpForm {
   username: string;
   email: string;
   password: string;
-  password2: string;
+  comparePassword: string;
 }
 
 const schema = yup
@@ -21,7 +21,7 @@ const schema = yup
     username: yup.string().required('Campo Obrigatório'),
     email: yup.string().email('E-mail inválido').required('Campo Obrigatório'),
     password: yup.string().required('Campo Obrigatório'),
-    password2: yup.string().required('Campo Obrigatório'),
+    comparePassword: yup.string().required('Campo Obrigatório'),
   })
   .required();
 
@@ -112,10 +112,10 @@ const SignUp = () => {
             }}
           />
           <Input
-            error={!!errors.password2}
-            helperText={errors.password2?.message || ' '}
+            error={!!errors.comparePassword}
+            helperText={errors.comparePassword?.message || ' '}
             control={control}
-            name='password2'
+            name='comparePassword'
             label='Confirmar Senha'
             variant='outlined'
             type='password'
