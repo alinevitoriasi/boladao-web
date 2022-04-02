@@ -10,6 +10,7 @@ import * as yup from 'yup';
 import api from '../../services/api';
 import { login } from '../../services/auth';
 import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 interface ISignUpForm {
   username: string;
@@ -23,12 +24,16 @@ const schema = yup
     username: yup.string().required('Campo Obrigatório'),
     email: yup.string().email('E-mail inválido').required('Campo Obrigatório'),
     password: yup.string().required('Campo Obrigatório'),
-    comparePassword: yup.string().required('Campo Obrigatório'),
+    comparePassword: yup
+      .string()
+      .required('Campo Obrigatório')
+      .oneOf([yup.ref('password'), null], 'Senhas não coincidem'),
   })
   .required();
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
   const {
     control,
     handleSubmit,
@@ -46,8 +51,13 @@ const SignUp = () => {
       });
       login(response?.data?.token);
       navigate('/posts');
-    } catch (error) {
-      console.log(error);
+      enqueueSnackbar('Cadastrado com sucesso!', { variant: 'success' });
+    } catch (error: any) {
+      if (error?.response) {
+        enqueueSnackbar(error.response.data?.message, { variant: 'error' });
+      } else {
+        enqueueSnackbar('Erro ao cadastrar!', { variant: 'error' });
+      }
     }
   };
 

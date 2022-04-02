@@ -11,6 +11,7 @@ import * as yup from 'yup';
 import api from '../../services/api';
 import { login } from '../../services/auth';
 import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 interface ILoginForm {
   email: string;
@@ -25,20 +26,26 @@ const schema = yup
   .required();
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
+
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<ILoginForm>({ resolver: yupResolver(schema) });
 
-  const navigate = useNavigate();
   const onSubmit = async (data: ILoginForm) => {
     try {
       const response = await api.post('/login', data);
       login(response?.data?.token);
       navigate('/posts');
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      if (error?.response) {
+        enqueueSnackbar(error.response.data?.message, { variant: 'error' });
+      } else {
+        enqueueSnackbar('Erro!', { variant: 'error' });
+      }
     }
   };
 

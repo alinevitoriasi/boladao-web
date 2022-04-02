@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.css';
 
 import Button from '../../components/Button';
@@ -16,7 +16,6 @@ const Home = () => {
       container
       sx={{
         height: 'inherit',
-        // background: 'red',
         justifyContent: 'center',
         alignItems: 'center',
       }}

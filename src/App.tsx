@@ -10,8 +10,6 @@ import { Box, createTheme, ThemeProvider } from '@mui/material';
 
 import AppBar from './components/AppBar';
 
-import About from './pages/About';
-// import Contact from './pages/Contact';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
@@ -19,6 +17,7 @@ import NewPosts from './pages/NewPosts';
 import Posts from './pages/Posts';
 import { isAuthenticated } from './services/auth';
 import NotFound from './pages/NotFound';
+import { SnackbarProvider } from 'notistack';
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -66,20 +65,22 @@ const App = () => {
   return (
     <BrowserRouter>
       <ThemeProvider theme={appTheme}>
-        <AppBar />
-        <Box sx={{ backgroundColor: '#FFFFFF', height: '90vh' }}>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/cadastrar' element={<SignUp />} />
-            {/* <Route path='/contato/:id' element={<Contact />} /> */}
-            <Route element={<PrivateRoute />}>
-              <Route path='/posts' element={<Posts />} />
-              <Route path='/novopost' element={<NewPosts />} />
-            </Route>
-            <Route path='*' element={<NotFound />} />
-          </Routes>
-        </Box>
+        <SnackbarProvider maxSnack={3}>
+          <AppBar />
+          <Box sx={{ backgroundColor: '#FFFFFF', height: '90vh' }}>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/cadastrar' element={<SignUp />} />
+              {/* <Route path='/contato/:id' element={<Contact />} /> */}
+              <Route element={<PrivateRoute />}>
+                <Route path='/posts' element={<Posts />} />
+                <Route path='/novopost' element={<NewPosts />} />
+              </Route>
+              <Route path='*' element={<NotFound />} />
+            </Routes>
+          </Box>
+        </SnackbarProvider>
       </ThemeProvider>
     </BrowserRouter>
   );
