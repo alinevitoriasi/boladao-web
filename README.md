@@ -3,11 +3,14 @@
 
 # Projeto Boladão 
 
+----
+## Sumário
 - [Descrição](#descrição)
 - [Pré-requisitos](#pré-requisitos)
 - [Guia para Uso](#guia-para-uso)
 - [Etapas do Projeto](#etapas)
 - [Padrão de Emojis](#padrão-de-emojis)
+----
 
 ## Descrição
 
