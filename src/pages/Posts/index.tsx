@@ -1,31 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import { Grid, Typography } from '@mui/material';
+import React from 'react';
+import { CircularProgress, Grid, Typography } from '@mui/material';
 
 import Card from '../../components/Card';
 import api from '../../services/api';
 import Button from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { useSnackbar } from 'notistack';
 
-interface Post {
-  _id: string;
-  text: string;
-}
 const Posts = () => {
   const navigate = useNavigate();
-  const [posts, setPosts] = useState<Post[]>([]);
+  const { enqueueSnackbar } = useSnackbar();
 
-  async function getPosts() {
-    const response = await api.get('/posts');
-    setPosts(response.data);
+  const { isLoading, isError, error, data } = useQuery('repoData', () =>
+    api.get('/posts').then((res) => res.data)
+  );
+
+  if (isError) {
+    const errorMessage = error as any;
+    enqueueSnackbar(errorMessage?.message, { variant: 'error' });
   }
-
-  useEffect(() => {
-    getPosts();
-  }, []);
 
   return (
     <>
-      {posts?.length < 1 ? (
+      {isLoading && (
+        <Grid
+          container
+          direction='column'
+          justifyContent='center'
+          alignItems='center'
+          sx={{ paddingTop: '45vh' }}
+        >
+          <Grid item>
+            <CircularProgress color='inherit' />
+          </Grid>
+        </Grid>
+      )}
+      {!isLoading && data?.length < 1 ? (
         <Grid
           container
           direction='column'
@@ -48,7 +59,7 @@ const Posts = () => {
         </Grid>
       ) : (
         <Grid container>
-          {posts?.map((post: Post) => {
+          {data?.map((post: IPost) => {
             return (
               <Grid item key={post._id} md={6} sm={12}>
                 <Card text={post.text} />

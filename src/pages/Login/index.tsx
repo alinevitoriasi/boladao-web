@@ -1,29 +1,18 @@
 import React from 'react';
 
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
+import { useMutation } from 'react-query';
+
 import { Box, Grid, Typography } from '@mui/material';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import { useForm } from 'react-hook-form';
-
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 
 import api from '../../services/api';
 import { login } from '../../services/auth';
-import { useNavigate } from 'react-router-dom';
-import { useSnackbar } from 'notistack';
-
-interface ILoginForm {
-  email: string;
-  password: string;
-}
-
-const schema = yup
-  .object({
-    email: yup.string().email('E-mail inválido').required('Campo Obrigatório'),
-    password: yup.string().required('Campo Obrigatório'),
-  })
-  .required();
+import { schemaLogin } from '../../schema/schema-login';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -33,23 +22,19 @@ const Login = () => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<ILoginForm>({ resolver: yupResolver(schema) });
+  } = useForm<ILogin>({ resolver: yupResolver(schemaLogin) });
 
-  const onSubmit = async (data: ILoginForm) => {
-    try {
-      const response = await api.post('/login', data);
-      login(response?.data?.token);
+  const { mutate } = useMutation((data: ILogin) => api.post('/login', data), {
+    onSuccess: ({ data }: any) => {
+      login(data.token);
       navigate('/posts');
-    } catch (error: any) {
-      if (error?.response) {
-        enqueueSnackbar(error.response.data?.message, { variant: 'error' });
-      } else {
-        enqueueSnackbar('Erro!', { variant: 'error' });
-      }
-    }
-  };
-
-  console.log(errors.email);
+    },
+    onError: ({ response }: any) => {
+      enqueueSnackbar(response?.data?.message || 'Error', {
+        variant: 'error',
+      });
+    },
+  });
 
   return (
     <Grid
@@ -77,7 +62,7 @@ const Login = () => {
         >
           Login Boladaço
         </Typography>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit((data: ILogin) => mutate(data))}>
           <Input
             error={!!errors.email}
             helperText={errors.email?.message || ' '}

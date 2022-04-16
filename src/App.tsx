@@ -18,6 +18,7 @@ import Posts from './pages/Posts';
 import { isAuthenticated } from './services/auth';
 import NotFound from './pages/NotFound';
 import { SnackbarProvider } from 'notistack';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -62,25 +63,28 @@ const App = () => {
     return <>{isAuthenticated() ? <Outlet /> : <Navigate to='/' />}</>;
   };
 
+  const queryClient = new QueryClient();
   return (
     <BrowserRouter>
       <ThemeProvider theme={appTheme}>
-        <SnackbarProvider maxSnack={3}>
-          <AppBar />
-          <Box sx={{ backgroundColor: '#FFFFFF', height: '90vh' }}>
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/cadastrar' element={<SignUp />} />
-              {/* <Route path='/contato/:id' element={<Contact />} /> */}
-              <Route element={<PrivateRoute />}>
-                <Route path='/posts' element={<Posts />} />
-                <Route path='/novopost' element={<NewPosts />} />
-              </Route>
-              <Route path='*' element={<NotFound />} />
-            </Routes>
-          </Box>
-        </SnackbarProvider>
+        <QueryClientProvider client={queryClient}>
+          <SnackbarProvider maxSnack={3}>
+            <AppBar />
+            <Box sx={{ backgroundColor: '#FFFFFF', height: '90vh' }}>
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/cadastrar' element={<SignUp />} />
+                {/* <Route path='/contato/:id' element={<Contact />} /> */}
+                <Route element={<PrivateRoute />}>
+                  <Route path='/posts' element={<Posts />} />
+                  <Route path='/novopost' element={<NewPosts />} />
+                </Route>
+                <Route path='*' element={<NotFound />} />
+              </Routes>
+            </Box>
+          </SnackbarProvider>
+        </QueryClientProvider>
       </ThemeProvider>
     </BrowserRouter>
   );

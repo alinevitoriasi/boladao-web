@@ -1,35 +1,17 @@
 import React from 'react';
 
 import { Grid, Box, Typography } from '@mui/material';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
+
+import api from '../../services/api';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import { useForm } from 'react-hook-form';
 
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import api from '../../services/api';
 import { login } from '../../services/auth';
-import { useNavigate } from 'react-router-dom';
-import { useSnackbar } from 'notistack';
-
-interface ISignUpForm {
-  username: string;
-  email: string;
-  password: string;
-  comparePassword: string;
-}
-
-const schema = yup
-  .object({
-    username: yup.string().required('Campo Obrigatório'),
-    email: yup.string().email('E-mail inválido').required('Campo Obrigatório'),
-    password: yup.string().required('Campo Obrigatório'),
-    comparePassword: yup
-      .string()
-      .required('Campo Obrigatório')
-      .oneOf([yup.ref('password'), null], 'Senhas não coincidem'),
-  })
-  .required();
+import { schemaSignUp } from '../../schema/schema-sign-up';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -38,11 +20,11 @@ const SignUp = () => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<ISignUpForm>({
-    resolver: yupResolver(schema),
+  } = useForm<ISignUp>({
+    resolver: yupResolver(schemaSignUp),
   });
 
-  const onSubmit = async (data: ISignUpForm) => {
+  const onSubmit = async (data: ISignUp) => {
     try {
       await api.post('/users', data);
       const response = await api.post('/login', {
