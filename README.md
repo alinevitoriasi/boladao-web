@@ -7,6 +7,7 @@
 ## Sumário
 - [Descrição](#descrição)
 - [Pré-requisitos](#pré-requisitos)
+- [Interface](#interface)
 - [Guia para Uso](#guia-para-uso)
 - [Etapas do Projeto](#etapas)
 - [Padrão de Emojis](#padrão-de-emojis)
@@ -31,6 +32,8 @@ Em construção... 🚧🚧🚧
 - [ ] ....
 
 
+## Interface
+O protótipo da interface do projeto está disponivel em [Figma](https://www.figma.com/file/hg0M0UabAJTOnJglswht73/TCC?node-id=0%3A1).
 
 ## Pré-requisitos
 Para começar esse projeto é necessário ter [Node.JS](https://nodejs.org/pt-br/) e recomendamos a utilização do [VSCode](https://code.visualstudio.com/download).
