@@ -12,7 +12,7 @@ const Posts = () => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
-  const { isLoading, isError, error, data } = useQuery('repoData', () =>
+  const { isLoading, isError, error, data } = useQuery('posts', () =>
     api.get('/posts').then((res) => res.data)
   );
 
@@ -20,6 +20,7 @@ const Posts = () => {
     const errorMessage = error as any;
     enqueueSnackbar(errorMessage?.message, { variant: 'error' });
   }
+  // console.log(data);
 
   return (
     <>
@@ -61,8 +62,13 @@ const Posts = () => {
         <Grid container>
           {data?.map((post: IPost) => {
             return (
-              <Grid item key={post._id} md={6} sm={12}>
-                <Card text={post.text} />
+              <Grid item key={post._id} md={4} sm={12}>
+                <Card
+                  handleClick={() => navigate(`/post/${post?._id}`)}
+                  noAction
+                  text={post.text}
+                  author={post?.author?.username}
+                />
               </Grid>
             );
           })}

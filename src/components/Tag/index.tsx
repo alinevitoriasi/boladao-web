@@ -19,9 +19,7 @@ const Tag = ({ label, color, size, variant, onDelete }: ITag) => {
       variant={variant}
       size={size}
       onDelete={onDelete}
-      sx={{
-        marginRight: 2,
-      }}
+      sx={{ marginRight: 2 }}
     />
   );
 };

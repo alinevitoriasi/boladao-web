@@ -1,0 +1,3 @@
+interface IPostForm {
+  text: string;
+}
