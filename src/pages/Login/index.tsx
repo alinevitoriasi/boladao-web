@@ -26,7 +26,7 @@ const Login = () => {
 
   const { mutate } = useMutation((data: ILogin) => api.post('/login', data), {
     onSuccess: ({ data }: any) => {
-      login(data.token);
+      login(data.token, data.username);
       navigate('/posts');
     },
     onError: ({ response }: any) => {
@@ -60,7 +60,7 @@ const Login = () => {
           className='title'
           sx={{ fontWeight: 800, paddingBottom: 5 }}
         >
-          Login Boladaço
+          Entrar
         </Typography>
         <form onSubmit={handleSubmit((data: ILogin) => mutate(data))}>
           <Input

@@ -1,15 +1,3 @@
-
-.__header nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
-.__header nav span {
-  margin: 0 10px;
-}
-
 .link-button {
   color: #2f243a;
   text-decoration: none;
@@ -18,6 +6,7 @@
   padding-top: 10px;
   padding-bottom: 10px;
   transition: .5s;
+  margin-left: 10px;
 }
 
 .link-button:hover{

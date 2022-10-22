@@ -5,6 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 import './style.css';
 import Button from '../Button';
+import { SvgIcon, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+
+import PostAddIcon from '@mui/icons-material/PostAdd';
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -15,11 +19,19 @@ const Header = () => {
     navigate('/');
   };
 
+  const username = localStorage.getItem('username');
   return (
-    <div className='__header'>
-      <nav>
-        {!isAuthenticated() ? (
-          <>
+    <>
+      {!isAuthenticated() ? (
+        <>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+            }}
+          >
             <Link
               className={`link-button ${pathname === '/' && '__active'}`}
               to='/'
@@ -27,7 +39,6 @@ const Header = () => {
               Inicio
             </Link>
             <span>|</span>
-
             {pathname === '/login' ? (
               <Link
                 className={`link-button ${pathname === '/login' && '__active'}`}
@@ -45,31 +56,39 @@ const Header = () => {
                 Login
               </Link>
             )}
-          </>
-        ) : (
-          <>
-            <Link
-              className={`link-button ${pathname === '/posts' && '__active'}`}
-              to='/posts'
-            >
-              Posts
-            </Link>
-            <span>|</span>
-
+          </Box>
+        </>
+      ) : (
+        <>
+          <Typography variant='body1' component='div'>
+            Oi, {username}
+          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
             <Link
               className={`link-button ${
                 pathname === '/novopost' && '__active'
               }`}
               to='/novopost'
             >
-              Novo Post
+              <SvgIcon component={PostAddIcon} />
             </Link>
-
+            <Link
+              className={`link-button ${pathname === '/posts' && '__active'}`}
+              to='/posts'
+            >
+              Posts
+            </Link>
+            <Link
+              className={`link-button ${pathname === '/myposts' && '__active'}`}
+              to='/myposts'
+            >
+              Minhas publicações
+            </Link>
             <Button text='Sair' variant='text' onClick={() => handleLogout()} />
-          </>
-        )}
-      </nav>
-    </div>
+          </Box>
+        </>
+      )}
+    </>
   );
 };
 

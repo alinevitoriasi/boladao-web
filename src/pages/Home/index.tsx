@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './style.css';
 
 import Button from '../../components/Button';
 
-import home from '../../assets/home-image.png';
+import home from '../../assets/image.png';
 import { Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
@@ -20,6 +20,10 @@ const Home = () => {
         alignItems: 'center',
       }}
     >
+      <Grid item md={6} sm={12}>
+        <img className='home-image' src={home} alt='Imagem' />
+      </Grid>
+
       <Grid item md={6} sm={12}>
         <Box
           sx={{
@@ -50,9 +54,6 @@ const Home = () => {
             onClick={() => navigate('/cadastrar')}
           />
         </Box>
-      </Grid>
-      <Grid item md={6} sm={12}>
-        <img className='home-image' src={home} alt='Imagem' />
       </Grid>
     </Grid>
   );

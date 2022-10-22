@@ -31,7 +31,8 @@ const SignUp = () => {
         email: data?.email,
         password: data?.password,
       });
-      login(response?.data?.token);
+
+      login(response?.data?.token, data?.username);
       navigate('/posts');
       enqueueSnackbar('Cadastrado com sucesso!', { variant: 'success' });
     } catch (error: any) {
@@ -43,7 +44,7 @@ const SignUp = () => {
     }
   };
 
-  console.log(errors.email);
+  // console.log(errors.email);
 
   return (
     <Grid
@@ -69,9 +70,12 @@ const SignUp = () => {
           className='title'
           sx={{ fontWeight: 800, paddingBottom: 5 }}
         >
-          Cadastro Boladaço
+          Cadastrar
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <Typography variant='body1'>
+            *Atenção não utilizar o seu nome verdadeiro.
+          </Typography>
           <Input
             error={!!errors.username}
             helperText={errors.username?.message || ' '}
