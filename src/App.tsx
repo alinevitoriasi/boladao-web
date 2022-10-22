@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Route,
   Routes,
@@ -6,19 +6,22 @@ import {
   BrowserRouter,
   Outlet,
 } from 'react-router-dom';
+import { SnackbarProvider } from 'notistack';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { Box, createTheme, ThemeProvider } from '@mui/material';
 
-import AppBar from './components/AppBar';
+import { isAuthenticated } from './services/auth';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import NewPosts from './pages/NewPosts';
 import Posts from './pages/Posts';
-import { isAuthenticated } from './services/auth';
 import NotFound from './pages/NotFound';
-import { SnackbarProvider } from 'notistack';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import MyPosts from './pages/MyPosts';
+import Post from './pages/Post';
+
+import AppBar from './components/AppBar';
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -48,10 +51,10 @@ const App = () => {
     },
     palette: {
       primary: {
-        main: '#6A49D8',
+        main: '#1852C2',
       },
       secondary: {
-        main: '#1c1464',
+        main: '#1852C2',
       },
     },
     typography: {
@@ -59,9 +62,48 @@ const App = () => {
     },
   });
 
+  const [teste, setTeste] = useState<
+    'fixed' | 'absolute' | 'sticky' | 'static' | 'relative'
+  >('absolute');
+
   const PrivateRoute = (): JSX.Element => {
-    return <>{isAuthenticated() ? <Outlet /> : <Navigate to='/' />}</>;
+    setTeste('static');
+
+    return (
+      <>
+        {/* <AppBar position='static' /> */}
+        <Box
+          sx={{
+            backgroundColor: '#FFFFFF',
+            height: '100vh',
+          }}
+        >
+          {isAuthenticated() ? <Outlet /> : <Navigate to='/' />}
+        </Box>
+      </>
+    );
   };
+
+  const PublicRoute = (): JSX.Element => {
+    setTeste('absolute');
+
+    return (
+      <>
+        {/* <AppBar position='absolute' /> */}
+        <Box
+          sx={{
+            backgroundColor: '#E1EBFF',
+            boxShadow: 'inset -65vw 0 #FFFFFF',
+            height: '100vh',
+          }}
+        >
+          {!isAuthenticated() ? <Outlet /> : <Navigate to='/posts' />}{' '}
+        </Box>
+      </>
+    );
+  };
+
+  console.log('isAuthenticated()', isAuthenticated());
 
   const queryClient = new QueryClient();
   return (
@@ -69,20 +111,23 @@ const App = () => {
       <ThemeProvider theme={appTheme}>
         <QueryClientProvider client={queryClient}>
           <SnackbarProvider maxSnack={3}>
-            <AppBar />
-            <Box sx={{ backgroundColor: '#FFFFFF', height: '90vh' }}>
-              <Routes>
+            <AppBar position={teste} />
+            <Routes>
+              <Route element={<PublicRoute />}>
                 <Route path='/' element={<Home />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/cadastrar' element={<SignUp />} />
-                {/* <Route path='/contato/:id' element={<Contact />} /> */}
-                <Route element={<PrivateRoute />}>
-                  <Route path='/posts' element={<Posts />} />
-                  <Route path='/novopost' element={<NewPosts />} />
-                </Route>
-                <Route path='*' element={<NotFound />} />
-              </Routes>
-            </Box>
+                {/* <Route path='*' element={<NotFound />} /> */}
+              </Route>
+              <Route element={<PrivateRoute />}>
+                <Route path='/post/:id' element={<Post />} />;
+                <Route path='/posts' element={<Posts />} />
+                <Route path='/myposts' element={<MyPosts />} />
+                <Route path='/novopost' element={<NewPosts />} />
+                {/* <Route path='*' element={<NotFound />} /> */}
+              </Route>
+              <Route path='*' element={<NotFound />} />
+            </Routes>
           </SnackbarProvider>
         </QueryClientProvider>
       </ThemeProvider>
