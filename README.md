@@ -29,7 +29,6 @@ Em construção... 🚧🚧🚧
 - [x] Adiciona Axios ao projeto.
 - [x] Chamadas da API (Services)
 - [x] Autenticação / Criação de Rotas Privadas
-- [ ] ....
 
 
 ## Interface
