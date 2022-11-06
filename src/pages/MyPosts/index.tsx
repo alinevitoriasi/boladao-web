@@ -19,7 +19,7 @@ const MyPosts = () => {
 
   const { isLoading, isError, error, data, refetch } = useQuery(
     'Myposts',
-    () => api.get('/mypost').then((res) => res.data),
+    () => api.get('/mypost', { withCredentials: true }).then((res) => res.data),
     { retry: 0 }
   );
 

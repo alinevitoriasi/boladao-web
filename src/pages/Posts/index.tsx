@@ -13,7 +13,7 @@ const Posts = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const { isLoading, isError, error, data } = useQuery('posts', () =>
-    api.get('/posts').then((res) => res.data)
+    api.get('/posts', { withCredentials: true }).then((res) => res.data)
   );
 
   if (isError) {
