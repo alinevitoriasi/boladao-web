@@ -2,6 +2,7 @@ import axios from 'axios';
 import { getToken } from './auth';
 
 const api = axios.create({
+  withCredentials: true,
   baseURL: 'http://localhost:5000',
 });
 
