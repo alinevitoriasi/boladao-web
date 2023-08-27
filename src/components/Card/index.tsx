@@ -99,15 +99,18 @@ const Card = ({
             }
           />
           <CardContent>
-            <Typography sx={{ paddingLeft: 2 }} variant='body1'>
+            <Typography
+              sx={{ paddingLeft: 2, paddingBottom: 10 }}
+              variant='body1'
+            >
               {text}
             </Typography>
           </CardContent>
-          <CardActions>
+          {/* <CardActions>
             <IconButton onClick={() => setModalView(true)}>
               <ShareIcon />
             </IconButton>
-          </CardActions>
+          </CardActions> */}
         </CardActionArea>
       </MUICard>
     </>

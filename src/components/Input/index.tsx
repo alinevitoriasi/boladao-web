@@ -34,6 +34,7 @@ const Input = ({
       inputRef={ref}
       value={value}
       type={type}
+      InputLabelProps={{ shrink: true }}
       {...rest}
     />
   );

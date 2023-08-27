@@ -34,7 +34,7 @@ const Post = () => {
   // console.log(data);
   return (
     <Grid container>
-      <Grid item md={8}>
+      <Grid item md={6}>
         <Card noAction text={data?.text} author={data?.author?.username} />;
         <form onSubmit={() => {}}>
           <TextBox
@@ -42,7 +42,7 @@ const Post = () => {
             variant='outlined'
             name='text'
             control={control}
-            placeholder='Digite seu texto aqui'
+            placeholder='Digite seu comentário'
             rows={5}
             fullWidth={true}
             sx={{
@@ -53,7 +53,7 @@ const Post = () => {
           />
           <Button
             sx={{
-              m: 3,
+              m: 2,
               width: '100%',
             }}
             color='secondary'

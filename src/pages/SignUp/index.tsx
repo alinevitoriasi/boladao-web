@@ -73,9 +73,9 @@ const SignUp = () => {
           Cadastrar
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Typography variant='body1'>
+          {/* <Typography variant='body1'>
             *Atenção não utilizar o seu nome verdadeiro.
-          </Typography>
+          </Typography> */}
           <Input
             error={!!errors.username}
             helperText={errors.username?.message || ' '}
