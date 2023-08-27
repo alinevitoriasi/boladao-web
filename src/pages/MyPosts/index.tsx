@@ -72,7 +72,7 @@ const MyPosts = () => {
     <>
       <Modal
         title='Remover'
-        text='Tem certeza que deseja remover o post?'
+        text='Tem certeza que deseja remover a publicação?'
         open={modalDelete}
         setOpen={setModalDelete}
         onSuccess={() => {
@@ -81,7 +81,7 @@ const MyPosts = () => {
       />
       <Modal
         title='Editar'
-        text='Tem certeza que deseja atualizar o post?'
+        text='Tem certeza que deseja editar a publicação?'
         open={modalEdit}
         setOpen={setModalEdit}
         onSuccess={() => {
@@ -131,11 +131,13 @@ const MyPosts = () => {
             <Typography variant='h4'>
               Você ainda não tem uma publicação.
             </Typography>
-            <Typography variant='body1' sx={{ padding: '40px' }}>
-              Faça sua primeira postagem
+            <Typography variant='body1' sx={{ py: 10, width: 800 }}>
+              Compartilhe sua experiência e faça sua voz ser ouvida. Este é um
+              espaço seguro para compartilhar suas vivências e contribuir para a
+              conscientização e mudança.
             </Typography>
             <Button
-              text='Criar um post'
+              text='Fazer uma publicação'
               onClick={() => {
                 navigate('/novopost');
               }}

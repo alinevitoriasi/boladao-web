@@ -28,18 +28,22 @@ const Home = () => {
         <Box
           sx={{
             marginTop: 5,
-            p: 20,
+            pr: 50,
           }}
         >
-          <Typography variant='h2' className='title' sx={{ fontWeight: 800 }}>
-            Home Boladão
+          <Typography variant='h3' className='title' sx={{ fontWeight: 800 }}>
+            Compartilhe sua experiência de discriminação de forma segura
           </Typography>
-          <Typography variant='body1'>
-            Mussum Ipsum, cacilds vidis litro abertis. Viva Forevis aptent
-            taciti sociosqu ad litora torquent.Detraxit consequat et quo num
-            tendi nada.Delegadis gente finis bibendum egestas augue arcu ut
-            est.Praesent vel viverra nisi. Mauris aliquet nunc non turpis
-            scelerisque, eget.
+          <Typography
+            variant='body1'
+            sx={{
+              marginTop: '20px',
+            }}
+          >
+            Aqui acreditamos que cada voz importa. Este é um espaço seguro e
+            inclusivo para compartilhar suas experiências de discriminação no
+            ambiente acadêmico, onde suas histórias têm o poder de criar
+            mudanças reais.
           </Typography>
 
           <Button
