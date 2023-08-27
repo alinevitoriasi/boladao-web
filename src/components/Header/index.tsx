@@ -36,9 +36,20 @@ const Header = () => {
               className={`link-button ${pathname === '/' && '__active'}`}
               to='/'
             >
-              Inicio
+              Início
             </Link>
-            <span>|</span>
+            <Link
+              className={`link-button ${pathname === '/sobre' && '__active'}`}
+              to='/'
+            >
+              Sobre
+            </Link>
+            <Link
+              className={`link-button ${pathname === '/ajuda' && '__active'}`}
+              to='/'
+            >
+              Ajuda
+            </Link>
             {pathname === '/login' ? (
               <Link
                 className={`link-button ${pathname === '/login' && '__active'}`}
