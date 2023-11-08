@@ -10,6 +10,7 @@ import api from '../../services/api';
 import Input from '../../components/Input';
 import SelectComponent from '../../components/Select';
 import Radio from '../../components/Radio';
+import { useNavigate } from 'react-router-dom';
 
 interface IPostForm {
   tipo: Array<string>;
@@ -35,6 +36,7 @@ const NewPosts = () => {
     }
     setLoading(false);
   };
+  const navigate = useNavigate();
 
   return (
     <Grid
@@ -62,9 +64,9 @@ const NewPosts = () => {
           <Typography variant='body1' sx={{ py: 10, width: 800 }}>
             Obrigado por compartilhar sua história. Suas palavras têm um impacto
             significativo e contribuem para promover a conscientização e a
-            mudança no ambiente acadêmico. Lembre-se de que cada experiência
-            compartilhada fortalece nossa comunidade e nos ajuda a construir um
-            espaço mais inclusivo e empático para todos.
+            mudança no ambiente acadêmico. <br /> Lembre-se de que cada
+            experiência compartilhada fortalece nossa comunidade e nos ajuda a
+            construir um espaço mais inclusivo e empático para todos.
           </Typography>
           <Button
             color='secondary'
@@ -72,6 +74,9 @@ const NewPosts = () => {
             text='ir para tela inicial'
             type='submit'
             loading={loading}
+            onClick={() => {
+              navigate('/');
+            }}
           />
         </Box>
       ) : (
@@ -91,11 +96,12 @@ const NewPosts = () => {
           </Typography>
           <Typography variant='body1' sx={{ width: 800 }}>
             Você está contribuindo para um ambiente acadêmico mais inclusivo e
-            empático. Suas palavras podem inspirar a mudança e fortalecer nossa
-            comunidade.
+            empático.
           </Typography>
           <Typography variant='body1' sx={{ pb: 5, width: 800 }}>
-            Lembre-se de ser respeitoso e evitar divulgar informações sensíveis.
+            Suas palavras podem inspirar a mudança e fortalecer nossa
+            comunidade. Lembre-se de ser respeitoso e evitar divulgar
+            informações sensíveis.
           </Typography>
           <Typography variant='body1' sx={{ pb: 5, width: 800 }}>
             Juntos, estamos construindo um espaço onde todas as vozes são

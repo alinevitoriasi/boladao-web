@@ -151,6 +151,7 @@ const MyPosts = () => {
               <Grid item key={post._id} md={4} sm={12}>
                 <Card
                   text={post.text}
+                  handleClick={() => navigate(`/post/${post?._id}`)}
                   handleEdit={() => {
                     setValue('text', post.text);
                     setModalEdit(true);

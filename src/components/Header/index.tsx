@@ -64,7 +64,7 @@ const Header = () => {
                 }`}
                 to='/login'
               >
-                Login
+                Entrar
               </Link>
             )}
           </Box>

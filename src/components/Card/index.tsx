@@ -42,9 +42,9 @@ const Card = ({
   handleEdit,
   handleDelete,
   handleClick,
+  sx,
 }: ICard) => {
   const [modalView, setModalView] = useState(false);
-
   const tamanho = author && author?.length > 4 ? author?.length - 4 : 0;
   return (
     <>
@@ -52,17 +52,19 @@ const Card = ({
       <MUICard
         sx={{
           m: 3,
+          marginTop: 0,
           boxShadow: 0,
           minWidth: 275,
           borderRadius: 3,
           backgroundColor: '#DAE1E1',
+          ...sx,
         }}
       >
         <CardActionArea
           sx={{
             padding: 3,
           }}
-          // disabled={!handleClick}
+          disabled={!handleClick}
           onClick={handleClick}
         >
           <CardHeader
@@ -88,10 +90,22 @@ const Card = ({
             action={
               !noAction && (
                 <Box gap={2} display='flex'>
-                  <IconButton aria-label='settings' onClick={handleEdit}>
+                  <IconButton
+                    aria-label='settings'
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      handleEdit && handleEdit(event);
+                    }}
+                  >
                     <EditIcon />
                   </IconButton>
-                  <IconButton aria-label='settings' onClick={handleDelete}>
+                  <IconButton
+                    aria-label='settings'
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      handleDelete && handleDelete(event);
+                    }}
+                  >
                     <ClearIcon />
                   </IconButton>
                 </Box>

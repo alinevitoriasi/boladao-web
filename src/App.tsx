@@ -75,7 +75,8 @@ const App = () => {
         <Box
           sx={{
             backgroundColor: '#FFFFFF',
-            height: '100vh',
+            height: '80vh',
+            marginTop: '50px',
           }}
         >
           {isAuthenticated() ? <Outlet /> : <Navigate to='/' />}
