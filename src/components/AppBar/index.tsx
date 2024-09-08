@@ -3,11 +3,8 @@ import React from 'react';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Header from '../Header';
-interface IAppBar {
-  position: 'fixed' | 'absolute' | 'sticky' | 'static' | 'relative';
-}
-const AppBar = ({ position }: IAppBar) => {
-  console.log(position);
+
+const AppBar = ({ position }: any) => {
   return (
     <MuiAppBar
       color='transparent'

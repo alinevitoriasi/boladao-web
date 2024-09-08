@@ -10,10 +10,13 @@ import { Grid, Typography, Box } from '@mui/material';
 import Button from '../../components/Button';
 import TextBox from '../../components/TextBox';
 import { useForm } from 'react-hook-form';
-const Post = () => {
+const AdminPage = () => {
+  // const idPost = '6306be5597bff51012d64f9b';
   const { control, handleSubmit, reset } = useForm<any>({});
 
   const { id } = useParams();
+
+  // console.log(id);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -133,7 +136,7 @@ const Post = () => {
               }}
             >
               <Typography variant='body1'>
-                Essa publicação ainda não possui nenhum comentário.
+                AdminPage Essa publicação ainda não possui nenhum comentário.
               </Typography>
               <Typography variant='body1'>
                 Seja o primeiro a deixar uma mensagem de apoio!
@@ -146,4 +149,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default AdminPage;

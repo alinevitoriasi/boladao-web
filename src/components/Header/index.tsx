@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { isAuthenticated, logout } from '../../services/auth';
 import { useNavigate } from 'react-router-dom';

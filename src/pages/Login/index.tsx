@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -13,10 +13,12 @@ import Input from '../../components/Input';
 import api from '../../services/api';
 import { login } from '../../services/auth';
 import { schemaLogin } from '../../schema/schema-login';
+import AuthContext from '../../services/auth/context/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  const { setUser } = useContext(AuthContext);
 
   const {
     control,
@@ -26,8 +28,10 @@ const Login = () => {
 
   const { mutate } = useMutation((data: ILogin) => api.post('/login', data), {
     onSuccess: ({ data }: any) => {
+      console.log(data.isAdmin);
+      setUser(data);
       login(data.token, data.username);
-      navigate('/posts');
+      !data?.isAdmin ? navigate('/admin') : navigate('/posts');
     },
     onError: ({ response }: any) => {
       enqueueSnackbar(response?.data?.message || 'Error', {
