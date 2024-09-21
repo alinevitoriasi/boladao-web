@@ -1,14 +1,9 @@
 import axios from 'axios';
 import { getToken } from './auth';
 
-// const api = axios.create({
-//   withCredentials: true,
-//   baseURL: 'http://localhost:5000',
-// });
-
 const api = axios.create({
   withCredentials: true,
-  baseURL: 'https://campus-juntos-backend.onrender.com',
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 api.interceptors.request.use(async (config: any) => {
