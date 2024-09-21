@@ -12,10 +12,10 @@ import MyPosts from './pages/MyPosts';
 import Post from './pages/Post';
 
 import { isAdmin, isAuthenticated } from './services/auth';
+import AdminPage from './pages/AdminPages/AdminPosts';
+import AdminPost from './pages/AdminPages/AdminPost';
 
 const AppRoutes = ({ setHeaderPosition }: any) => {
-  console.log(isAdmin);
-
   const PrivateRoute = (): JSX.Element => {
     setHeaderPosition('static');
     return (
@@ -59,14 +59,17 @@ const AppRoutes = ({ setHeaderPosition }: any) => {
         {/* <Route path='*' element={<NotFound />} /> */}
       </Route>
       <Route element={<PrivateRoute />}>
-        <>
+        {/* <>
           <Route path='/post/:id' element={<Post />} />;
           <Route path='/posts' element={<Posts />} />
           <Route path='/myposts' element={<MyPosts />} />
           <Route path='/novopost' element={<NewPosts />} />
-        </>
-        {/* {isAdmin ? (
-          <Route path='/admin' element={<NewPosts />} />
+        </> */}
+        {isAdmin ? (
+          <>
+            <Route path='/admin' element={<AdminPage />} />
+            <Route path='/post/:id' element={<AdminPost />} />;
+          </>
         ) : (
           <>
             <Route path='/post/:id' element={<Post />} />;
@@ -74,8 +77,7 @@ const AppRoutes = ({ setHeaderPosition }: any) => {
             <Route path='/myposts' element={<MyPosts />} />
             <Route path='/novopost' element={<NewPosts />} />
           </>
-        )} */}
-        {/* <Route path='*' element={<NotFound />} /> */}
+        )}
       </Route>
       <Route path='*' element={<NotFound />} />
     </Routes>
