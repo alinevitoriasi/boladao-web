@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import {
   ButtonTypeMap,
   CardActionArea,
-  CardActions,
   CardContent,
   CardHeader,
   IconButton,
@@ -14,12 +13,12 @@ import {
 } from '@mui/material';
 import { Box } from '@mui/system';
 import MUICard from '@mui/material/Card';
-import ShareIcon from '@mui/icons-material/Share';
 import AccountBoxIcon from '@mui/icons-material/AccountCircle';
 import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 
 import ShareModal from '../ShareModal';
+import Tag from '../Tag';
 
 interface ICard {
   color?: ButtonTypeMap['props']['color'];
@@ -28,21 +27,25 @@ interface ICard {
   text?: string;
   author?: string;
   date?: string;
+  tags?: Array<string>;
   noAction?: boolean;
   handleEdit?: React.MouseEventHandler<HTMLButtonElement>;
   handleDelete?: React.MouseEventHandler<HTMLButtonElement>;
   handleClick?: React.MouseEventHandler<HTMLButtonElement>;
+  height?: number;
 }
 
 const Card = ({
   text,
   author,
   date,
+  tags,
   noAction,
   handleEdit,
   handleDelete,
   handleClick,
   sx,
+  height,
 }: ICard) => {
   const [modalView, setModalView] = useState(false);
   const tamanho = author && author?.length > 4 ? author?.length - 4 : 0;
@@ -54,7 +57,8 @@ const Card = ({
           m: 3,
           marginTop: 0,
           boxShadow: 0,
-          minWidth: 275,
+          minWidth: 350,
+          height: height || 350,
           borderRadius: 3,
           backgroundColor: '#DAE1E1',
           ...sx,
@@ -88,33 +92,44 @@ const Card = ({
               <Typography variant='subtitle1'>{date?.toLowerCase()}</Typography>
             }
             action={
-              !noAction && (
-                <Box gap={2} display='flex'>
-                  <IconButton
-                    aria-label='settings'
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      handleEdit && handleEdit(event);
-                    }}
-                  >
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton
-                    aria-label='settings'
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      handleDelete && handleDelete(event);
-                    }}
-                  >
-                    <ClearIcon />
-                  </IconButton>
-                </Box>
-              )
+              <Box gap={2} display='flex'>
+                {!noAction && (
+                  <>
+                    <IconButton
+                      aria-label='settings'
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        handleEdit && handleEdit(event);
+                      }}
+                    >
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton
+                      aria-label='settings'
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        handleDelete && handleDelete(event);
+                      }}
+                    >
+                      <ClearIcon />
+                    </IconButton>
+                  </>
+                )}
+                {tags?.length
+                  ? tags.map((tag, index) => <Tag key={index} label={tag} />)
+                  : ''}
+              </Box>
             }
           />
-          <CardContent>
+          <CardContent
+            sx={{ paddingLeft: 2, boxSizing: 'border-box', overflow: 'hidden' }}
+          >
             <Typography
-              sx={{ paddingLeft: 2, paddingBottom: 10 }}
+              sx={{
+                paddingLeft: 2,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
               variant='body1'
             >
               {text}

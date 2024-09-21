@@ -13,9 +13,11 @@ import Radio from '../../components/Radio';
 import { useNavigate } from 'react-router-dom';
 
 interface IPostForm {
-  tipo: Array<string>;
-  local: string;
   text: string;
+  date: string;
+  type: Array<string>;
+  location: string;
+  isAnonymous: boolean;
 }
 
 const NewPosts = () => {
@@ -26,9 +28,17 @@ const NewPosts = () => {
 
   const onSubmit = async (data: IPostForm) => {
     console.log('onSubmit', data);
+    const newPost = {
+      text: data?.text,
+      date: data?.date,
+      type: data?.type,
+      location: data?.location,
+      isAnonymous: !!data?.isAnonymous,
+    };
+
     setLoading(true);
     try {
-      await api.post('/posts', data);
+      await api.post('/posts', newPost);
       setSuccessMessage(true);
       reset();
     } catch (error) {
@@ -110,7 +120,7 @@ const NewPosts = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <SelectComponent
               label='Tipo'
-              name='tipo'
+              name='type'
               options={[
                 'Racismo',
                 'Machismo',
@@ -132,7 +142,7 @@ const NewPosts = () => {
               // error={!!errors.email}
               // helperText={errors.email?.message || ' '}
               control={control}
-              name='local'
+              name='location'
               label='Local'
               variant='outlined'
               sx={{
@@ -144,7 +154,7 @@ const NewPosts = () => {
               // error={!!errors.email}
               // helperText={errors.email?.message || ' '}
               control={control}
-              name='data'
+              name='date'
               label='Data'
               type='date'
               variant='outlined'
@@ -162,10 +172,10 @@ const NewPosts = () => {
               }}
             >
               Deseja manter sua identidade anônima?
-              <Radio name='anomimato' control={control}>
+              <Radio name='isAnonymous' control={control}>
                 Sim
               </Radio>
-              <Radio name='anomimato' control={control}>
+              <Radio name='isAnonymous' control={control}>
                 Não
               </Radio>
             </div>
