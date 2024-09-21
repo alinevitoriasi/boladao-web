@@ -59,13 +59,8 @@ const Posts = () => {
           </Grid>
         </Grid>
       ) : (
-        <Grid
-          container
-          sx={{ width: 800, marginLeft: '50vh' }}
-          justifyContent='center'
-          alignItems='center'
-        >
-          {data?.map((post: IPost) => {
+        <Grid container justifyContent='center' alignItems='center'>
+          {data?.posts?.map((post: IPost) => {
             return (
               <Grid item key={post._id} md={6} sm={12}>
                 <Card
@@ -73,6 +68,7 @@ const Posts = () => {
                   noAction
                   text={post.text}
                   author={post?.author?.username}
+                  tags={post?.type}
                 />
               </Grid>
             );

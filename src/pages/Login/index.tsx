@@ -11,7 +11,7 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 
 import api from '../../services/api';
-import { login } from '../../services/auth';
+import { isAdmin, login } from '../../services/auth';
 import { schemaLogin } from '../../schema/schema-login';
 import AuthContext from '../../services/auth/context/AuthContext';
 
@@ -28,10 +28,10 @@ const Login = () => {
 
   const { mutate } = useMutation((data: ILogin) => api.post('/login', data), {
     onSuccess: ({ data }: any) => {
-      console.log(data.isAdmin);
       setUser(data);
       login(data.token, data.username);
-      !data?.isAdmin ? navigate('/admin') : navigate('/posts');
+      navigate('/posts');
+      isAdmin ? navigate('/admin') : navigate('/posts');
     },
     onError: ({ response }: any) => {
       enqueueSnackbar(response?.data?.message || 'Error', {

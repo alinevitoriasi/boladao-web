@@ -114,6 +114,7 @@ const Post = () => {
               ?.map((comment: any, index: any): any => {
                 return (
                   <Card
+                    height={200}
                     key={index}
                     noAction
                     text={comment?.text}
