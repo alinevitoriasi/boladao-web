@@ -20,7 +20,7 @@ const AdminPage = () => {
     ['posts', JSON.stringify(params)],
     () =>
       api
-        .get('/posts', { params: params, withCredentials: true })
+        .get('admin/posts', { params: params, withCredentials: true })
         .then((res) => res.data)
   );
 
@@ -154,7 +154,7 @@ const AdminPage = () => {
                 return (
                   <Grid item key={post._id} md={6} sm={12}>
                     <Card
-                      handleClick={() => navigate(`/post/${post?._id}`)}
+                      handleClick={() => navigate(`/admin/post/${post?._id}`)}
                       noAction
                       text={post.text}
                       author={post?.author?.username}

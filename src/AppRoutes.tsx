@@ -11,13 +11,14 @@ import NotFound from './pages/NotFound';
 import MyPosts from './pages/MyPosts';
 import Post from './pages/Post';
 
-import { isAdmin, isAuthenticated } from './services/auth';
+import { isAdminValidation, isAuthenticated } from './services/auth';
 import AdminPage from './pages/AdminPages/AdminPosts';
 import AdminPost from './pages/AdminPages/AdminPost';
 
 const AppRoutes = ({ setHeaderPosition }: any) => {
   const PrivateRoute = (): JSX.Element => {
     setHeaderPosition('static');
+
     return (
       <Box
         sx={{
@@ -44,7 +45,7 @@ const AppRoutes = ({ setHeaderPosition }: any) => {
         {!isAuthenticated() ? (
           <Outlet />
         ) : (
-          <Navigate to={isAdmin ? '/admin' : '/posts'} />
+          <Navigate to={isAdminValidation() ? '/admin' : '/posts'} />
         )}{' '}
       </Box>
     );
@@ -56,30 +57,24 @@ const AppRoutes = ({ setHeaderPosition }: any) => {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/cadastrar' element={<SignUp />} />
-        {/* <Route path='*' element={<NotFound />} /> */}
+        <Route path='*' element={<NotFound />} />
       </Route>
       <Route element={<PrivateRoute />}>
-        {/* <>
-          <Route path='/post/:id' element={<Post />} />;
-          <Route path='/posts' element={<Posts />} />
-          <Route path='/myposts' element={<MyPosts />} />
-          <Route path='/novopost' element={<NewPosts />} />
-        </> */}
-        {isAdmin ? (
+        <Route path='/posts' element={<Posts />} />
+        {isAdminValidation() ? (
           <>
             <Route path='/admin' element={<AdminPage />} />
-            <Route path='/post/:id' element={<AdminPost />} />;
+            <Route path='/admin/post/:id' element={<AdminPost />} />
           </>
         ) : (
           <>
-            <Route path='/post/:id' element={<Post />} />;
-            <Route path='/posts' element={<Posts />} />
+            <Route path='/post/:id' element={<Post />} />
             <Route path='/myposts' element={<MyPosts />} />
             <Route path='/novopost' element={<NewPosts />} />
           </>
         )}
+        <Route path='*' element={<NotFound />} />
       </Route>
-      <Route path='*' element={<NotFound />} />
     </Routes>
   );
 };

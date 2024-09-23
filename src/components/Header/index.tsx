@@ -1,5 +1,5 @@
 import React from 'react';
-import { isAdmin, isAuthenticated } from '../../services/auth';
+import { isAdminValidation, isAuthenticated } from '../../services/auth';
 
 import './style.css';
 import HomeHeader from './HomeHeader';
@@ -9,7 +9,7 @@ import AdminHeader from './AdminHeader';
 const Header = () => {
   if (!isAuthenticated()) return <HomeHeader />;
 
-  if (isAuthenticated() && isAdmin) return <AdminHeader />;
+  if (isAuthenticated() && isAdminValidation()) return <AdminHeader />;
 
   return <UserHeader />;
 };

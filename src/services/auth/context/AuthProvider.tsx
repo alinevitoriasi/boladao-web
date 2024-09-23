@@ -13,7 +13,6 @@ const AuthProvider: React.FC = ({ children }): any => {
     getToken,
   };
 
-  console.log(user);
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );

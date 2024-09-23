@@ -6,7 +6,6 @@ interface IUseAuthContext {
   isAuthenticated?: any;
   getToken?: any;
 }
-// Ainda não utilizado
 
 const useAuthContext = (): IUseAuthContext => {
   const [user, setUser] = useState({});
