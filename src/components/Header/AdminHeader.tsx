@@ -31,7 +31,7 @@ const AdminHeader = () => {
         </Link>
         <Link
           className={`link-button ${pathname === '/campanhas' && '__active'}`}
-          to='/myposts'
+          to='/teste'
         >
           Campanhas
         </Link>

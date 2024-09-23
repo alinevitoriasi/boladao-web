@@ -20,7 +20,6 @@ const Posts = () => {
     const errorMessage = error as any;
     enqueueSnackbar(errorMessage?.message, { variant: 'error' });
   }
-  // console.log(data);
 
   return (
     <>

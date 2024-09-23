@@ -44,8 +44,6 @@ const SignUp = () => {
     }
   };
 
-  // console.log(errors.email);
-
   return (
     <Grid
       container
