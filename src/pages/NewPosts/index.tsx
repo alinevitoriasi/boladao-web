@@ -46,7 +46,6 @@ const NewPosts = () => {
     setLoading(false);
   };
   const navigate = useNavigate();
-  console.log(watch('isAnonymous'));
   return (
     <Grid
       container
