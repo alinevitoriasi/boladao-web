@@ -108,18 +108,22 @@ const AdminPost = () => {
                 {data?.location}
               </p>
               <p>
-                <strong> Autor: </strong>
-                {visibility
-                  ? data?.author?.username
-                  : '*'.repeat(data?.author?.username?.length)}
-                <IconButton
-                  aria-label='report'
-                  onClick={() => {
-                    setVisibility(!visibility);
-                  }}
-                >
-                  <VisibilityIcon />
-                </IconButton>
+                {!data?.isAnonymous && (
+                  <>
+                    <strong> Autor: </strong>
+                    {visibility
+                      ? data?.author?.username
+                      : '*'.repeat(data?.author?.username?.length)}
+                    <IconButton
+                      aria-label='report'
+                      onClick={() => {
+                        setVisibility(!visibility);
+                      }}
+                    >
+                      <VisibilityIcon />
+                    </IconButton>
+                  </>
+                )}
               </p>
             </Box>
           </Grid>
