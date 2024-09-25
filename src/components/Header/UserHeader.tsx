@@ -19,11 +19,12 @@ const UserHeader = () => {
     navigate('/');
   };
 
-  const username = localStorage.getItem('username');
+  // const username = localStorage.getItem('username');
   return (
     <>
-      <Typography variant='body1' component='div'>
-        Oi, {username}
+      <Typography variant='h5' component='div'>
+        {/* Oi, {username} */}
+        CampusJuntos
       </Typography>
       <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
         <Link
