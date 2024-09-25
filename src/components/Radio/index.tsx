@@ -7,7 +7,14 @@ type IRadio = RadioProps & {
   children?: React.ReactNode;
 };
 
-const Radio = ({ name, sx, control, children, ...rest }: IRadio) => {
+const Radio = ({
+  name,
+  sx,
+  control,
+  value: optionValue,
+  children,
+  ...rest
+}: IRadio) => {
   const {
     field: { onChange, value, ref },
   } = useController({
@@ -23,7 +30,8 @@ const Radio = ({ name, sx, control, children, ...rest }: IRadio) => {
         name={name}
         onChange={onChange}
         inputRef={ref}
-        value={value}
+        value={optionValue}
+        checked={value === optionValue?.toString()}
         {...rest}
       />
       {children}

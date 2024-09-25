@@ -17,14 +17,13 @@ interface IPostForm {
   date: string;
   type: Array<string>;
   location: string;
-  isAnonymous: boolean;
+  isAnonymous: string | boolean;
 }
 
 const NewPosts = () => {
   const { control, watch, handleSubmit, reset } = useForm<IPostForm>();
   const [loading, setLoading] = useState(false);
   const [sucessMessage, setSuccessMessage] = useState(false);
-  console.log(watch());
 
   const onSubmit = async (data: IPostForm) => {
     console.log('onSubmit', data);
@@ -33,7 +32,7 @@ const NewPosts = () => {
       date: data?.date,
       type: data?.type,
       location: data?.location,
-      isAnonymous: !!data?.isAnonymous,
+      isAnonymous: data?.isAnonymous === 'true' ? true : false,
     };
 
     setLoading(true);
@@ -47,7 +46,7 @@ const NewPosts = () => {
     setLoading(false);
   };
   const navigate = useNavigate();
-
+  console.log(watch('isAnonymous'));
   return (
     <Grid
       container
@@ -172,10 +171,10 @@ const NewPosts = () => {
               }}
             >
               Deseja manter sua identidade anônima?
-              <Radio name='isAnonymous' control={control}>
+              <Radio name='isAnonymous' value={true} control={control}>
                 Sim
               </Radio>
-              <Radio name='isAnonymous' control={control}>
+              <Radio name='isAnonymous' value={false} control={control}>
                 Não
               </Radio>
             </div>
