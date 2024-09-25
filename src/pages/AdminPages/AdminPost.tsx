@@ -6,12 +6,15 @@ import { useMutation, useQuery } from 'react-query';
 
 import api from '../../services/api';
 import Card from '../../components/Card';
-import { Grid, Typography, Box } from '@mui/material';
+import { Grid, Typography, Box, IconButton } from '@mui/material';
 import Tag from '../../components/Tag';
 import Modal from '../../components/Modal';
 
+import VisibilityIcon from '@mui/icons-material/Visibility';
+
 const AdminPost = () => {
   const { id } = useParams();
+  const [visibility, setVisibility] = useState(false);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -49,7 +52,7 @@ const AdminPost = () => {
     <>
       <Modal
         title='Reportar'
-        text='Tem certeza que deseja ocultar a publicação?'
+        text='Tem certeza de que deseja mudar a visibilidade desta publicação?'
         open={modalReport}
         setOpen={setModalReport}
         onSuccess={() => {
@@ -71,7 +74,7 @@ const AdminPost = () => {
               text={data?.text}
               author={data?.author?.username}
               sx={{ m: 0, marginBottom: 10, minHeight: 400 }}
-              handleReport={(e) => {
+              handleReport={() => {
                 setModalReport(true);
               }}
               handleClick={() => null}
@@ -88,6 +91,14 @@ const AdminPost = () => {
                   : ''}
               </p>
               <p>
+                <strong> Status: </strong>
+                {data?.isVisible ? (
+                  <Tag color='success' label={'Visível'} />
+                ) : (
+                  <Tag color='error' label={'Oculto'} />
+                )}
+              </p>
+              <p>
                 {' '}
                 <strong> Data: </strong>
                 {data?.date}
@@ -98,7 +109,17 @@ const AdminPost = () => {
               </p>
               <p>
                 <strong> Autor: </strong>
-                {data?.author?.username}
+                {visibility
+                  ? data?.author?.username
+                  : '*'.repeat(data?.author?.username?.length)}
+                <IconButton
+                  aria-label='report'
+                  onClick={() => {
+                    setVisibility(!visibility);
+                  }}
+                >
+                  <VisibilityIcon />
+                </IconButton>
               </p>
             </Box>
           </Grid>
@@ -128,7 +149,6 @@ const AdminPost = () => {
                     author={comment?.username}
                     height={200}
                     noAction
-                    isAdmin
                     handleReport={(e) => {
                       setModalReport(true);
                     }}

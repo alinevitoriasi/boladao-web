@@ -68,6 +68,7 @@ const Posts = () => {
                   text={post.text}
                   author={post?.author?.username}
                   tags={post?.type}
+                  height={350}
                 />
               </Grid>
             );

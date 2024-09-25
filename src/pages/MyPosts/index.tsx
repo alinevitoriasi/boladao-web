@@ -150,6 +150,7 @@ const MyPosts = () => {
             return (
               <Grid item key={post._id} md={4} sm={12}>
                 <Card
+                  height={350}
                   text={post.text}
                   handleClick={() => navigate(`/post/${post?._id}`)}
                   handleEdit={() => {
@@ -161,6 +162,7 @@ const MyPosts = () => {
                     setModalDelete(true);
                     setPostId(post._id);
                   }}
+                  alert={!post.isVisible}
                 />
               </Grid>
             );

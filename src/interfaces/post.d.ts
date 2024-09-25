@@ -5,4 +5,5 @@ interface IPost {
   author: {
     username: string;
   };
+  isVisible: boolean;
 }

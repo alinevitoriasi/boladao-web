@@ -4,12 +4,14 @@ import {
   ButtonTypeMap,
   CardActionArea,
   CardContent,
+  CardActions,
   CardHeader,
   IconButton,
   SvgIcon,
   SxProps,
   Theme,
   Typography,
+  Alert,
 } from '@mui/material';
 import { Box } from '@mui/system';
 import MUICard from '@mui/material/Card';
@@ -36,6 +38,7 @@ interface ICard {
   handleDelete?: React.MouseEventHandler<HTMLButtonElement>;
   handleClick?: React.MouseEventHandler<HTMLButtonElement>;
   height?: number;
+  alert?: boolean;
 }
 
 const Card = ({
@@ -51,9 +54,17 @@ const Card = ({
   isAdmin,
   sx,
   height,
+  alert,
 }: ICard) => {
   const [modalView, setModalView] = useState(false);
   const tamanho = author && author?.length > 4 ? author?.length - 4 : 0;
+
+  const textHeight = () => {
+    if (height && alert) return 200;
+    if (height) return 500;
+    return undefined;
+  };
+
   return (
     <>
       <ShareModal open={modalView} setOpen={setModalView} />
@@ -63,7 +74,7 @@ const Card = ({
           marginTop: 0,
           boxShadow: 0,
           minWidth: 350,
-          height: height || 350,
+          height: height,
           borderRadius: 3,
           backgroundColor: '#DAE1E1',
           ...sx,
@@ -156,13 +167,27 @@ const Card = ({
                 sx={{
                   paddingLeft: 2,
                   overflow: 'hidden',
-                  textOverflow: 'ellipsis',
                 }}
                 variant='body1'
               >
-                {text}
+                {text?.slice(0, textHeight())}
+                {text && textHeight() && text?.length > (textHeight() || 0) && (
+                  <>
+                    {'...   '}
+                    <strong style={{ whiteSpace: 'nowrap' }}>ver mais</strong>
+                  </>
+                )}
               </Typography>
             </CardContent>
+            <CardActions>
+              {alert && (
+                <Alert severity='warning'>
+                  Este post foi ocultado por conter conteúdo inadequado ou ser
+                  classificado como SPAM. Caso acredite que houve um engano,
+                  entre em contato com o suporte em: administrador@email.com
+                </Alert>
+              )}
+            </CardActions>
           </div>
         </CardActionArea>
       </MUICard>
