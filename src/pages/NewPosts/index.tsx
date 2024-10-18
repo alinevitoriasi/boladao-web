@@ -142,6 +142,7 @@ const NewPosts = () => {
               control={control}
               name='location'
               label='Local'
+              placeholder='Exemplo: Escola, Universidade, aos arredores do Campus...'
               variant='outlined'
               sx={{
                 width: '100%',
