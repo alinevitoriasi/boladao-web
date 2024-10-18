@@ -35,19 +35,13 @@ const AppRoutes = ({ setHeaderPosition }: any) => {
   const PublicRoute = (): JSX.Element => {
     setHeaderPosition('absolute');
     return (
-      <Box
-        sx={{
-          backgroundColor: '#E1EBFF',
-          boxShadow: 'inset -65vw 0 #FFFFFF',
-          height: '100vh',
-        }}
-      >
+      <>
         {!isAuthenticated() ? (
           <Outlet />
         ) : (
           <Navigate to={isAdminValidation() ? '/admin' : '/posts'} />
         )}{' '}
-      </Box>
+      </>
     );
   };
 
@@ -56,6 +50,8 @@ const AppRoutes = ({ setHeaderPosition }: any) => {
       <Route element={<PublicRoute />}>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/about' element={<Login />} />
+        <Route path='/help' element={<Login />} />
         <Route path='/cadastrar' element={<SignUp />} />
         <Route path='*' element={<NotFound />} />
       </Route>

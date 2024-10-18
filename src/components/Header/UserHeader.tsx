@@ -37,7 +37,7 @@ const UserHeader = () => {
           className={`link-button ${pathname === '/posts' && '__active'}`}
           to='/posts'
         >
-          Posts
+          Publicações
         </Link>
         <Link
           className={`link-button ${pathname === '/myposts' && '__active'}`}

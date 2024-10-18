@@ -5,7 +5,8 @@ import { Box } from '@mui/system';
 
 const HomeHeader = () => {
   const { pathname } = useLocation();
-
+  const color =
+    pathname === '/login' || pathname === '/cadastrar' ? '#032254' : 'white';
   return (
     <Box
       sx={{
@@ -15,16 +16,22 @@ const HomeHeader = () => {
         justifyContent: 'flex-end',
       }}
     >
-      <Link className={`link-button ${pathname === '/' && '__active'}`} to='/'>
+      <Link
+        style={{ color: color }}
+        className={`link-button ${pathname === '/' && '__active'}`}
+        to='/'
+      >
         Início
       </Link>
       <Link
+        style={{ color: color }}
         className={`link-button ${pathname === '/sobre' && '__active'}`}
         to='/'
       >
         Sobre
       </Link>
       <Link
+        style={{ color: color }}
         className={`link-button ${pathname === '/ajuda' && '__active'}`}
         to='/'
       >
@@ -32,6 +39,7 @@ const HomeHeader = () => {
       </Link>
       {pathname === '/login' ? (
         <Link
+          style={{ color: color }}
           className={`link-button ${pathname === '/login' && '__active'}`}
           to='/cadastrar'
         >
@@ -39,6 +47,7 @@ const HomeHeader = () => {
         </Link>
       ) : (
         <Link
+          style={{ color: color }}
           className={`link-button ${pathname === '/cadastrar' && '__active'}`}
           to='/login'
         >

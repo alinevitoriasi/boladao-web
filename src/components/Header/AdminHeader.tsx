@@ -9,7 +9,7 @@ import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 const AdminHeader = () => {
-  // const { pathname } = useLocation();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -23,12 +23,12 @@ const AdminHeader = () => {
         Administrador
       </Typography>
       <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
-        {/* <Link
+        <Link
           className={`link-button ${pathname === '/admin' && '__active'}`}
           to='/admin'
         >
           Posts
-        </Link> */}
+        </Link>
         {/* <Link
           className={`link-button ${pathname === '/campanhas' && '__active'}`}
           to='/teste'

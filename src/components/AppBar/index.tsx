@@ -6,11 +6,7 @@ import Header from '../Header';
 
 const AppBar = ({ position }: any) => {
   return (
-    <MuiAppBar
-      color='transparent'
-      position={position}
-      sx={{ paddingTop: 3, boxShadow: 0 }}
-    >
+    <MuiAppBar color='transparent' position={'fixed'} sx={{ boxShadow: 0 }}>
       <Toolbar
         variant='dense'
         sx={{

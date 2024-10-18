@@ -1,22 +1,24 @@
 .link-button {
-  color: #2f243a;
+  color: #032254;
   text-decoration: none;
   padding-left: 20px;
   padding-right: 20px;
+  margin-top: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
   transition: .5s;
   margin-left: 10px;
+  font-size: 18px;
 }
 
 .link-button:hover{
   border-radius: 5px;
-  background-color: #1c1464;
-  color: white;
+  background-color:#1852C2;
+  color: white !important;
 }
 
 .__active{
   border-radius: 5px;
-  background-color: #1c1464;
-  color: white;
+  background-color:#1852C2;
+  color: white  !important;
 }
