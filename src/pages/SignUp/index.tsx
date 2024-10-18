@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { Grid, Box, Typography } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
@@ -12,6 +11,9 @@ import { useForm } from 'react-hook-form';
 
 import { login } from '../../services/auth';
 import { schemaSignUp } from '../../schema/schema-sign-up';
+import AppForm from '../../components/AppForm/AppForm';
+import AppFooter from '../Footer';
+import Typography from '../../components/Typography/Typography';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -45,29 +47,9 @@ const SignUp = () => {
   };
 
   return (
-    <Grid
-      container
-      direction='column'
-      justifyContent='center'
-      alignItems='center'
-      style={{ height: 'inherit' }}
-    >
-      <Box
-        sx={{
-          p: 15,
-          boxShadow: 3,
-          borderRadius: 3,
-          flexDirection: 'column',
-          justifyContent: 'center',
-          backgroundColor: '#FFFFFF',
-          minWidth: '40%',
-        }}
-      >
-        <Typography
-          variant='h4'
-          className='title'
-          sx={{ fontWeight: 800, paddingBottom: 5 }}
-        >
+    <>
+      <AppForm>
+        <Typography variant='h4' gutterBottom marked='center' align='center'>
           Cadastrar
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -135,8 +117,9 @@ const SignUp = () => {
             text='Cadastrar'
           />
         </form>
-      </Box>
-    </Grid>
+      </AppForm>
+      <AppFooter />
+    </>
   );
 };
 

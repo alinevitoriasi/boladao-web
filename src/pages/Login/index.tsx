@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { useMutation } from 'react-query';
 
-import { Box, Grid, Typography } from '@mui/material';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 
@@ -14,6 +13,9 @@ import api from '../../services/api';
 import { login } from '../../services/auth';
 import { schemaLogin } from '../../schema/schema-login';
 import AuthContext from '../../services/auth/context/AuthContext';
+import AppForm from '../../components/AppForm/AppForm';
+import Typography from '../../components/Typography/Typography';
+import AppFooter from '../Footer';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -40,29 +42,9 @@ const Login = () => {
   });
 
   return (
-    <Grid
-      container
-      direction='column'
-      justifyContent='center'
-      alignItems='center'
-      style={{ height: 'inherit' }}
-    >
-      <Box
-        sx={{
-          p: 15,
-          boxShadow: 3,
-          borderRadius: 3,
-          flexDirection: 'column',
-          justifyContent: 'center',
-          backgroundColor: '#FFFFFF',
-          minWidth: '40%',
-        }}
-      >
-        <Typography
-          variant='h4'
-          className='title'
-          sx={{ fontWeight: 800, paddingBottom: 5 }}
-        >
+    <>
+      <AppForm size={62}>
+        <Typography variant='h4' gutterBottom marked='center' align='center'>
           Entrar
         </Typography>
         <form onSubmit={handleSubmit((data: ILogin) => mutate(data))}>
@@ -95,8 +77,9 @@ const Login = () => {
           />
           <Button color='secondary' size='large' text='Entrar' type='submit' />
         </form>
-      </Box>
-    </Grid>
+      </AppForm>
+      <AppFooter />
+    </>
   );
 };
 
