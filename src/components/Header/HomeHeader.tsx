@@ -5,8 +5,7 @@ import { Box } from '@mui/system';
 
 const HomeHeader = () => {
   const { pathname } = useLocation();
-  const color =
-    pathname === '/login' || pathname === '/cadastrar' ? '#032254' : 'white';
+  const color = pathname === '/' ? 'white' : '#032254';
   return (
     <Box
       sx={{
@@ -26,7 +25,7 @@ const HomeHeader = () => {
       <Link
         style={{ color: color }}
         className={`link-button ${pathname === '/sobre' && '__active'}`}
-        to='/'
+        to='/sobre'
       >
         Sobre
       </Link>

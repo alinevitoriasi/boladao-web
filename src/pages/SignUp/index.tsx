@@ -49,7 +49,13 @@ const SignUp = () => {
   return (
     <>
       <AppForm>
-        <Typography variant='h4' gutterBottom marked='center' align='center'>
+        <Typography
+          variant='h4'
+          fontWeight={800}
+          gutterBottom
+          marked='center'
+          align='center'
+        >
           Cadastrar
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>

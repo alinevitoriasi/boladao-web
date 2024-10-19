@@ -8,8 +8,6 @@ import Toolbar from '@mui/material/Toolbar';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../services/auth';
 
-// import Typography from '../Typography/Typography';
-
 import Diversity2Icon from '@mui/icons-material/Diversity2';
 import HomeIcon from '@mui/icons-material/Home';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -21,7 +19,7 @@ import { Icon } from '@mui/material';
 
 const MainNav = () => {
   const userNav = [
-    { label: 'Inicio', to: '/', icon: <HomeIcon /> },
+    { label: 'Página Inicial', to: '/', icon: <HomeIcon /> },
     { label: 'Nova Publicação', to: '/novopost', icon: <PostAddIcon /> },
     {
       label: 'Minhas Publicações',

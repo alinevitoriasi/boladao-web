@@ -44,7 +44,13 @@ const Login = () => {
   return (
     <>
       <AppForm size={62}>
-        <Typography variant='h4' gutterBottom marked='center' align='center'>
+        <Typography
+          variant='h4'
+          gutterBottom
+          marked='center'
+          fontWeight={800}
+          align='center'
+        >
           Entrar
         </Typography>
         <form onSubmit={handleSubmit((data: ILogin) => mutate(data))}>

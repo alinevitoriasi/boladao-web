@@ -16,6 +16,7 @@ import AdminPage from './pages/AdminPages/AdminPosts';
 import AdminPost from './pages/AdminPages/AdminPost';
 import ResponsiveDrawer from './components/DashboardLayout/DashboardLayout';
 import AppBar from './components/AppBar';
+import About from './pages/About';
 
 const AppRoutes = () => {
   const PrivateRoute = (): JSX.Element => {
@@ -44,7 +45,7 @@ const AppRoutes = () => {
       <Route element={<PublicRoute />}>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/about' element={<Login />} />
+        <Route path='/sobre' element={<About />} />
         <Route path='/help' element={<Login />} />
         <Route path='/cadastrar' element={<SignUp />} />
         <Route path='*' element={<NotFound />} />
@@ -61,6 +62,7 @@ const AppRoutes = () => {
             <Route path='/post/:id' element={<Post />} />
             <Route path='/myposts' element={<MyPosts />} />
             <Route path='/novopost' element={<NewPosts />} />
+            <Route path='/sobre' element={<About />} />
           </>
         )}
         <Route path='*' element={<NotFound />} />
