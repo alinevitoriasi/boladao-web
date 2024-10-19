@@ -76,14 +76,12 @@ const Card = ({
           minWidth: 350,
           height: height,
           borderRadius: 3,
-          backgroundColor: '#DAE1E1',
           ...sx,
         }}
       >
         <CardActionArea
           sx={{
             padding: 3,
-            backgroundColor: '#DAE1E1',
             height: '100%',
             display: 'flex',
             alignItems: 'start',

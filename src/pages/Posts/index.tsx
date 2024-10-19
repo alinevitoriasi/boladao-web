@@ -61,7 +61,7 @@ const Posts = () => {
         <Grid container justifyContent='center' alignItems='center'>
           {data?.posts?.map((post: IPost) => {
             return (
-              <Grid item key={post._id} md={6} sm={12}>
+              <Grid item key={post._id} md={8} sm={12}>
                 <Card
                   handleClick={() => navigate(`/post/${post?._id}`)}
                   noAction

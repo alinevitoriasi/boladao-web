@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { createTheme, ThemeProvider } from '@mui/material';
 
-import AppBar from './components/AppBar';
 import AuthProvider from './services/auth/context/AuthProvider';
 import AppRoutes from './AppRoutes';
 
@@ -49,15 +48,13 @@ const App = () => {
 
   const queryClient = new QueryClient();
 
-  const [headerPosition, setHeaderPosition] = useState('absolute');
   return (
     <BrowserRouter>
       <ThemeProvider theme={appTheme}>
         <QueryClientProvider client={queryClient}>
           <SnackbarProvider maxSnack={3}>
             <AuthProvider>
-              <AppBar position={headerPosition} />
-              <AppRoutes setHeaderPosition={setHeaderPosition} />
+              <AppRoutes />
             </AuthProvider>
           </SnackbarProvider>
         </QueryClientProvider>

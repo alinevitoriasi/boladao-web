@@ -14,28 +14,22 @@ import Post from './pages/Post';
 import { isAdminValidation, isAuthenticated } from './services/auth';
 import AdminPage from './pages/AdminPages/AdminPosts';
 import AdminPost from './pages/AdminPages/AdminPost';
+import ResponsiveDrawer from './components/DashboardLayout/DashboardLayout';
+import AppBar from './components/AppBar';
 
-const AppRoutes = ({ setHeaderPosition }: any) => {
+const AppRoutes = () => {
   const PrivateRoute = (): JSX.Element => {
-    setHeaderPosition('static');
-
     return (
-      <Box
-        sx={{
-          backgroundColor: '#FFFFFF',
-          height: '80vh',
-          marginTop: '50px',
-        }}
-      >
+      <ResponsiveDrawer>
         {isAuthenticated() ? <Outlet /> : <Navigate to='/login' />}
-      </Box>
+      </ResponsiveDrawer>
     );
   };
 
   const PublicRoute = (): JSX.Element => {
-    setHeaderPosition('absolute');
     return (
       <>
+        <AppBar />
         {!isAuthenticated() ? (
           <Outlet />
         ) : (

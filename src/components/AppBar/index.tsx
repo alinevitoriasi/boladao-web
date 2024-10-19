@@ -4,7 +4,7 @@ import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Header from '../Header';
 
-const AppBar = ({ position }: any) => {
+const AppBar = () => {
   return (
     <MuiAppBar color='transparent' position={'fixed'} sx={{ boxShadow: 0 }}>
       <Toolbar

@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 
-import { Grid, Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import { CardContent, Grid } from '@mui/material';
 import TextBox from '../../components/TextBox';
 import Button from '../../components/Button';
-// import Tag from '../../components/Tag';
 import { useForm } from 'react-hook-form';
 import api from '../../services/api';
 import Input from '../../components/Input';
 import SelectComponent from '../../components/Select';
 import Radio from '../../components/Radio';
-import { useNavigate } from 'react-router-dom';
+import PostShared from './PostShared';
+import Typography from '../../components/Typography/Typography';
 
 interface IPostForm {
   text: string;
@@ -21,7 +20,7 @@ interface IPostForm {
 }
 
 const NewPosts = () => {
-  const { control, watch, handleSubmit, reset } = useForm<IPostForm>();
+  const { control, handleSubmit, reset } = useForm<IPostForm>();
   const [loading, setLoading] = useState(false);
   const [sucessMessage, setSuccessMessage] = useState(false);
 
@@ -45,162 +44,107 @@ const NewPosts = () => {
     }
     setLoading(false);
   };
-  const navigate = useNavigate();
   return (
     <Grid
       container
-      direction='column'
       justifyContent='center'
       alignItems='center'
       style={{ height: 'inherit' }}
     >
       {sucessMessage ? (
-        <Box
-          sx={{
-            p: 15,
-            // boxShadow: 3,
-            // borderRadius: 3,
-            flexDirection: 'column',
-            justifyContent: 'center',
-            backgroundColor: '#FFFFFF',
-            minWidth: '40%',
-          }}
-        >
-          <Typography variant='h4' className='title' sx={{ fontWeight: 800 }}>
-            Publicação Compartilhada!
-          </Typography>
-          <Typography variant='body1' sx={{ py: 10, width: 800 }}>
-            Obrigado por compartilhar sua história. Suas palavras têm um impacto
-            significativo e contribuem para promover a conscientização e a
-            mudança no ambiente acadêmico. <br /> Lembre-se de que cada
-            experiência compartilhada fortalece nossa comunidade e nos ajuda a
-            construir um espaço mais inclusivo e empático para todos.
-          </Typography>
-          <Button
-            color='secondary'
-            size='large'
-            text='ir para tela inicial'
-            type='submit'
-            loading={loading}
-            onClick={() => {
-              navigate('/');
-            }}
-          />
-        </Box>
+        <PostShared />
       ) : (
-        <Box
-          sx={{
-            p: 15,
-            // boxShadow: 3,
-            borderRadius: 3,
-            flexDirection: 'column',
-            justifyContent: 'center',
-            backgroundColor: '#FFFFFF',
-            minWidth: '40%',
-          }}
-        >
-          <Typography variant='h4' className='title' sx={{ fontWeight: 800 }}>
-            Compartilhe sua história
-          </Typography>
-          <Typography variant='body1' sx={{ width: 800 }}>
-            Você está contribuindo para um ambiente acadêmico mais inclusivo e
-            empático.
-          </Typography>
-          <Typography variant='body1' sx={{ pb: 5, width: 800 }}>
-            Suas palavras podem inspirar a mudança e fortalecer nossa
-            comunidade. Lembre-se de ser respeitoso e evitar divulgar
-            informações sensíveis.
-          </Typography>
-          <Typography variant='body1' sx={{ pb: 5, width: 800 }}>
-            Juntos, estamos construindo um espaço onde todas as vozes são
-            valorizadas.
-          </Typography>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <SelectComponent
-              label='Tipo'
-              name='type'
-              options={[
-                'Racismo',
-                'Machismo',
-                'LGBTfobia',
-                'Xenofobia',
-                'Gordofobia',
-                'Capicitismo',
-                'Etarismo',
-                'Intolerância Religiosa',
-                'Outros',
-              ]}
-              sx={{
-                width: '100%',
-                marginBottom: 4,
-              }}
-              control={control}
-            />
-            <Input
-              // error={!!errors.email}
-              // helperText={errors.email?.message || ' '}
-              control={control}
-              name='location'
-              label='Local'
-              placeholder='Exemplo: Escola, Universidade, aos arredores do Campus...'
-              variant='outlined'
-              sx={{
-                width: '100%',
-                marginBottom: 4,
-              }}
-            />
-            <Input
-              // error={!!errors.email}
-              // helperText={errors.email?.message || ' '}
-              control={control}
-              name='date'
-              label='Data'
-              type='date'
-              variant='outlined'
-              sx={{
-                width: '100%',
-                marginBottom: 2,
-              }}
-              InputLabelProps={{ shrink: true }}
-            />
-            <div
-              style={{
-                width: '100%',
-                marginBottom: 4,
-                marginTop: 0,
-              }}
-            >
-              Deseja manter sua identidade anônima?
-              <Radio name='isAnonymous' value={true} control={control}>
-                Sim
-              </Radio>
-              <Radio name='isAnonymous' value={false} control={control}>
-                Não
-              </Radio>
-            </div>
-            <TextBox
-              label=''
-              variant='outlined'
-              name='text'
-              control={control}
-              placeholder='Digite aqui sua experiência de discriminação'
-              rows={5}
-              fullWidth={true}
-              sx={{
-                marginBottom: 2,
-                width: '100%',
-              }}
-            />
+        <Grid item md={8} sm={9}>
+          <CardContent
+            sx={{ backgroundColor: '#fff', borderRadius: 5, padding: 10 }}
+          >
+            <Typography variant='h4' className='title' sx={{ fontWeight: 800 }}>
+              Compartilhe sua história
+            </Typography>
+            <Typography variant='body1'>
+              Você está contribuindo para um ambiente acadêmico mais inclusivo e
+              empático.
+            </Typography>
+            <Typography variant='body1'>
+              Suas palavras podem inspirar a mudança e fortalecer nossa
+              comunidade. Lembre-se de ser respeitoso e evitar divulgar
+              informações sensíveis.
+            </Typography>
+            <Typography variant='body1'>
+              Juntos, estamos construindo um espaço onde todas as vozes são
+              valorizadas.
+            </Typography>
+            <form onSubmit={handleSubmit(onSubmit)} style={{ width: '100%' }}>
+              <SelectComponent
+                label='Tipo'
+                name='type'
+                options={[
+                  'Racismo',
+                  'Machismo',
+                  'LGBTfobia',
+                  'Xenofobia',
+                  'Gordofobia',
+                  'Capicitismo',
+                  'Etarismo',
+                  'Intolerância Religiosa',
+                  'Outros',
+                ]}
+                control={control}
+                sx={{ width: '100%', mt: 5 }}
+              />
+              <Input
+                // error={!!errors.email}
+                // helperText={errors.email?.message || ' '}
+                control={control}
+                name='location'
+                label='Local'
+                placeholder='Exemplo: Escola, Universidade, aos arredores do Campus...'
+                variant='outlined'
+                sx={{ width: '100%', my: 5 }}
+              />
+              <Input
+                // error={!!errors.email}
+                // helperText={errors.email?.message || ' '}
+                control={control}
+                name='date'
+                label='Data'
+                type='date'
+                variant='outlined'
+                sx={{ width: '100%', mb: 5 }}
+                InputLabelProps={{ shrink: true }}
+              />
+              <div>
+                Deseja manter sua identidade anônima?
+                <Grid item md={6} sm={12}>
+                  <Radio name='isAnonymous' value={true} control={control}>
+                    Sim
+                  </Radio>
+                  <Radio name='isAnonymous' value={false} control={control}>
+                    Não
+                  </Radio>
+                </Grid>
+              </div>
+              <TextBox
+                label=''
+                variant='outlined'
+                name='text'
+                control={control}
+                placeholder='Digite aqui sua experiência de discriminação'
+                rows={5}
+                fullWidth={true}
+                sx={{ width: '100%', my: 5 }}
+              />
 
-            <Button
-              color='secondary'
-              size='large'
-              text='Enviar'
-              type='submit'
-              loading={loading}
-            />
-          </form>
-        </Box>
+              <Button
+                color='secondary'
+                size='large'
+                text='Enviar'
+                type='submit'
+                loading={loading}
+              />
+            </form>
+          </CardContent>
+        </Grid>
       )}
     </Grid>
   );

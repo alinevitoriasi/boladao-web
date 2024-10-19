@@ -29,7 +29,7 @@ const TextBox = ({
   return (
     <TextField
       multiline
-      sx={sx}
+      sx={{ ...sx, backgroundColor: 'white' }}
       name={name}
       label={label}
       variant={variant}
