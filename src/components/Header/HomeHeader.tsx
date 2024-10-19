@@ -2,10 +2,13 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './style.css';
 import { Box } from '@mui/system';
+import { Link as LinkMaterial } from '@mui/material';
 
 const HomeHeader = () => {
-  const { pathname } = useLocation();
-  const color = pathname === '/' ? 'white' : '#032254';
+  const { pathname, hash } = useLocation();
+  const color = 'white';
+
+  console.log(hash, pathname);
   return (
     <Box
       sx={{
@@ -13,45 +16,56 @@ const HomeHeader = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-end',
+        backgroundColor: '#1852C2',
+        position: 'static',
       }}
     >
-      <Link
+      <LinkMaterial
         style={{ color: color }}
-        className={`link-button ${pathname === '/' && '__active'}`}
-        to='/'
+        className={`link-button ${
+          hash === '/#home' || (pathname === '/' && !hash && '__active')
+        }`}
+        href='/#home'
       >
         Início
-      </Link>
-      <Link
-        style={{ color: color }}
-        className={`link-button ${pathname === '/sobre' && '__active'}`}
-        to='/sobre'
+      </LinkMaterial>
+      <LinkMaterial
+        style={{ color: color, textDecoration: 'none' }}
+        className={`link-button ${hash === '#about' && '__active'}`}
+        href='/#about'
       >
         Sobre
-      </Link>
-      <Link
-        style={{ color: color }}
-        className={`link-button ${pathname === '/ajuda' && '__active'}`}
-        to='/'
+      </LinkMaterial>
+      <LinkMaterial
+        style={{ color: color, textDecoration: 'none' }}
+        className={`link-button ${hash === '#security' && '__active'}`}
+        href='/#security'
+      >
+        Segurança
+      </LinkMaterial>
+      <LinkMaterial
+        style={{ color: color, textDecoration: 'none' }}
+        className={`link-button ${hash === '#help' && '__active'}`}
+        href='/#help'
       >
         Ajuda
-      </Link>
+      </LinkMaterial>
       {pathname === '/login' ? (
-        <Link
+        <LinkMaterial
           style={{ color: color }}
           className={`link-button ${pathname === '/login' && '__active'}`}
-          to='/cadastrar'
+          href='/cadastrar'
         >
           Cadastrar
-        </Link>
+        </LinkMaterial>
       ) : (
-        <Link
+        <LinkMaterial
           style={{ color: color }}
           className={`link-button ${pathname === '/cadastrar' && '__active'}`}
-          to='/login'
+          href='/login'
         >
           Entrar
-        </Link>
+        </LinkMaterial>
       )}
     </Box>
   );

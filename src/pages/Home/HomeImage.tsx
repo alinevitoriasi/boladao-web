@@ -40,7 +40,7 @@ const HomeImage = () => {
       <Typography
         color='inherit'
         align='center'
-        variant='body1'
+        variant='h5'
         sx={{ mb: 4, mt: { xs: 4, sm: 10 } }}
       >
         Aqui acreditamos que cada voz importa. Este é um espaço seguro e
@@ -50,7 +50,7 @@ const HomeImage = () => {
       </Typography>
       <Button
         color='secondary'
-        sx={{ minWidth: 200 }}
+        sx={{ minWidth: 200, marginTop: 5 }}
         text='Cadastrar'
         onClick={() => navigate('/cadastrar')}
       />

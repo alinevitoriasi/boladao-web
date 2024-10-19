@@ -11,66 +11,115 @@ const item: SxProps<Theme> = {
   flexDirection: 'column',
   alignItems: 'center',
   px: 5,
+  borderRadius: 5,
+  padding: 5,
+  height: '350px',
+  // backgroundColor: '#FFFFFF',
+  // border: 1,
+  // boxShadow: '0px 9px 31px -15px rgba(0,0,0,0.42)',
 };
 import SecurityIcon from '@mui/icons-material/Security';
 import Diversity1Icon from '@mui/icons-material/Diversity1';
 import HttpsIcon from '@mui/icons-material/Https';
 // import productCurvyLines from '../../assets/productCurvyLines.png';
 // import { IconButton } from '@mui/mat:erial';
-
+import security from '../../assets/seguranca.svg';
+import privacity from '../../assets/privacidade.svg';
+import moderator from '../../assets/moderacao.svg';
 const HomeInfo = () => {
   return (
-    <Box
-      component='section'
-      sx={{ display: 'flex', overflow: 'hidden', bgcolor: '#EFF4FF' }}
-    >
-      <Container sx={{ mt: 15, mb: 30, display: 'flex', position: 'relative' }}>
-        <Grid container spacing={5}>
-          <Grid item xs={12} md={4}>
-            <Box sx={item}>
-              <HttpsIcon />
-              <Typography variant='h6' sx={{ my: 5 }}>
-                Privacidade
-              </Typography>
-              <Typography variant='h5'>
-                {
-                  'Seus dados são tratados com o mais alto padrão de privacidade. '
-                }
-                {
-                  'Nenhuma informação pessoal é compartilhada sem o seu consentimento.'
-                }
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Box sx={item}>
-              <Diversity1Icon />
-              <Typography variant='h6' sx={{ my: 5 }}>
-                Moderação Ativa e Segura
-              </Typography>
-              <Typography variant='h5'>
-                {
-                  'Contamos com um sistema de moderação eficiente para garantir que todos os relatos sejam tratados com seriedade e respeito, preservando o sigilo e a segurança de todos os envolvidos.'
-                }
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Box sx={item}>
-              <SecurityIcon />
-              <Typography variant='h6' sx={{ my: 5 }}>
+    <>
+      <Box
+        id='security'
+        component='section'
+        sx={{ display: 'flex', bgcolor: '#F0F8FF', paddingTop: 10 }}
+      >
+        <Container sx={{ mb: 10, display: 'flex', position: 'relative' }}>
+          <Grid container spacing={5}>
+            <Grid item xs={12} md={12}>
+              <Typography variant='h3' fontWeight={800}>
+                {/* <MenuBookIcon /> */}
                 Segurança
               </Typography>
-              <Typography variant='h5'>
-                {
-                  'Nossa plataforma utiliza criptografia para proteger suas informações e garantir que seus dados estejam sempre seguros.'
-                }
-              </Typography>
-            </Box>
+            </Grid>
           </Grid>
-        </Grid>
-      </Container>
-    </Box>
+        </Container>
+      </Box>
+
+      <Box component='section' sx={{ display: 'flex', bgcolor: '#F0F8FF' }}>
+        <Container sx={{ mb: 40, display: 'flex', position: 'relative' }}>
+          <Grid container spacing={5}>
+            <Grid item xs={12} md={4}>
+              <Box sx={item}>
+                {/* <HttpsIcon fontSize='large' /> */}
+                <Box
+                  component='img'
+                  src={privacity}
+                  alt='Imagem Responsiva'
+                  sx={{
+                    height: 'auto',
+                    maxWidth: '30%',
+                  }}
+                />
+                <Typography variant='h5' sx={{ my: 5 }} fontWeight={800}>
+                  Privacidade
+                </Typography>
+                <Typography variant='h6'>
+                  {
+                    'Seus dados são tratados com o mais alto padrão de privacidade. '
+                  }
+                  {
+                    'Nenhuma informação pessoal é compartilhada sem o seu consentimento.'
+                  }
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Box sx={item}>
+                <Box
+                  component='img'
+                  src={moderator}
+                  alt='Imagem Responsiva'
+                  sx={{
+                    height: 'auto',
+                    maxWidth: '30%',
+                  }}
+                />
+                <Typography variant='h5' sx={{ my: 5 }} fontWeight={800}>
+                  Moderação Ativa e Segura
+                </Typography>
+                <Typography variant='h6'>
+                  {
+                    'Contamos com um sistema de moderação eficiente para garantir que todos os relatos sejam tratados com seriedade e respeito, preservando o sigilo e a segurança de todos os envolvidos.'
+                  }
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Box sx={item}>
+                <Box
+                  component='img'
+                  src={security}
+                  alt='Imagem Responsiva'
+                  sx={{
+                    height: 'auto',
+                    maxWidth: '30%',
+                  }}
+                />
+                <Typography variant='h5' sx={{ my: 5 }} fontWeight={800}>
+                  Segurança
+                </Typography>
+                <Typography variant='h6'>
+                  {
+                    'Nossa plataforma utiliza criptografia para proteger suas informações e garantir que seus dados estejam sempre seguros.'
+                  }
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+    </>
   );
 };
 

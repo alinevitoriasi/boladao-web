@@ -41,6 +41,7 @@ const HomeLayout = (
   return (
     <ProductHeroLayoutRoot>
       <Container
+        id='home'
         sx={{
           mt: 3,
           mb: 14,

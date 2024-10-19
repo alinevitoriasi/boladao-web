@@ -7,16 +7,9 @@ import Header from '../Header';
 const AppBar = () => {
   return (
     <MuiAppBar color='transparent' position={'fixed'} sx={{ boxShadow: 0 }}>
-      <Toolbar
-        variant='dense'
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Header />
-      </Toolbar>
+      <Header />
+      {/* <Toolbar>
+      </Toolbar> */}
     </MuiAppBar>
   );
 };

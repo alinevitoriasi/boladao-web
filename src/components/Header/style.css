@@ -12,13 +12,11 @@
 }
 
 .link-button:hover{
-  border-radius: 5px;
-  background-color:#1852C2;
+  background-color:#072b71;
   color: white !important;
 }
 
 .__active{
-  border-radius: 5px;
-  background-color:#1852C2;
+  background-color:#072b71;
   color: white  !important;
 }

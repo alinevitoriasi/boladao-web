@@ -14,7 +14,7 @@ const AppForm = ({ size, children }: IAppForm) => {
     <Box
       sx={{
         display: 'flex',
-        backgroundImage: 'linear-gradient(to right, #E2ECFF, #EBEAFF)', // Gradiente suave do cinza claro para o cinza
+        backgroundColor: '#F0F8FF', // Gradiente suave do cinza claro para o cinza
         backgroundRepeat: 'no-repeat',
       }}
     >
