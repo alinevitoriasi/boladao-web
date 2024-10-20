@@ -25,8 +25,9 @@ const AdminPost = () => {
   );
 
   if (isError) {
-    const errorMessage = error as any;
-    enqueueSnackbar(errorMessage?.message, { variant: 'error' });
+    const errorData = error as any;
+    const message = errorData?.response?.data?.message;
+    enqueueSnackbar(message, { variant: 'error' });
   }
 
   const { mutate: mutateReport } = useMutation(
