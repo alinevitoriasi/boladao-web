@@ -16,6 +16,7 @@ const TextBox = ({
   placeholder,
   control,
   name,
+  disabled,
 }: ITextBox) => {
   const {
     field: { onChange, value, ref },
@@ -29,6 +30,7 @@ const TextBox = ({
   return (
     <TextField
       multiline
+      disabled={disabled}
       sx={{ ...sx, backgroundColor: 'white' }}
       name={name}
       label={label}

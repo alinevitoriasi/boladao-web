@@ -6,4 +6,5 @@ interface IPost {
     username: string;
   };
   isVisible: boolean;
+  moderation?: string;
 }

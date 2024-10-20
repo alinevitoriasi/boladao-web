@@ -33,7 +33,7 @@ interface ICard {
   handleDelete?: React.MouseEventHandler<HTMLButtonElement>;
   handleClick?: React.MouseEventHandler<HTMLButtonElement>;
   height?: number;
-  alert?: boolean;
+  alert?: string;
   to?: any;
 }
 
@@ -154,10 +154,8 @@ const CardLink = ({
               </CardContent>
               <CardActions>
                 {alert && (
-                  <Alert severity='warning'>
-                    Este post foi ocultado por conter conteúdo inadequado ou ser
-                    classificado como SPAM. Caso acredite que houve um engano,
-                    entre em contato com o suporte em: administrador@email.com
+                  <Alert severity={alert?.includes('cvv') ? 'info' : 'warning'}>
+                    {alert}
                   </Alert>
                 )}
               </CardActions>

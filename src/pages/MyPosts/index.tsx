@@ -163,7 +163,7 @@ const MyPosts = () => {
                     setModalDelete(true);
                     setPostId(post._id);
                   }}
-                  alert={!post.isVisible}
+                  alert={post.moderation}
                 />
               </Grid>
             );
