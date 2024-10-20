@@ -37,7 +37,7 @@ const Posts = () => {
           </Grid>
         </Grid>
       )}
-      {!isLoading && data?.length < 1 ? (
+      {!isLoading && data?.posts?.length < 1 ? (
         <Grid
           container
           direction='column'
@@ -46,12 +46,12 @@ const Posts = () => {
           sx={{ paddingTop: '25vh' }}
         >
           <Grid item>
-            <Typography variant='h4'>Ainda não temos posts.</Typography>
+            <Typography variant='h4'>Ainda não temos publicações.</Typography>
             <Typography variant='body1' sx={{ padding: '40px' }}>
-              Seja o primeiro a fazer uma postagem
+              Seja o primeiro a fazer uma publicação.
             </Typography>
             <Button
-              text='Criar um post'
+              text='Criar publicação'
               onClick={() => {
                 navigate('/novopost');
               }}

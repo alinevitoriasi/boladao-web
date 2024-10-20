@@ -12,7 +12,7 @@ const PostShared = () => {
       sx={{
         p: 15,
         // boxShadow: 3,
-        // borderRadius: 3,
+        borderRadius: 5,
         flexDirection: 'column',
         justifyContent: 'center',
         backgroundColor: '#FFFFFF',
