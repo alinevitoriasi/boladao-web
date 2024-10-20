@@ -41,7 +41,7 @@ const DashboardLayout = ({ children }: IProps) => {
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
-          backgroundColor: 'rgba(3, 34, 84)',
+          backgroundColor: '#1852C2',
         }}
       >
         <Toolbar>
@@ -98,7 +98,7 @@ const DashboardLayout = ({ children }: IProps) => {
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           minHeight: '100vh',
-          backgroundImage: 'linear-gradient(to right, #E2ECFF, #E2ECFF)', // Gradiente suave do cinza claro para o cinza
+          backgroundColor: '#EFEFEF',
           backgroundRepeat: 'no-repeat',
         }}
       >

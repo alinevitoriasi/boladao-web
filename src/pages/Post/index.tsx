@@ -60,8 +60,8 @@ const Post = () => {
   console.log(data?.comments?.length > 0);
 
   return (
-    <Grid container>
-      <Grid item md={7} sm={12} sx={{ marginTop: '55px' }}>
+    <Grid container sx={{ marginLeft: 5 }}>
+      <Grid item md={7} sm={12}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Card
             noAction

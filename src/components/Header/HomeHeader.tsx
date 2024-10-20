@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import './style.css';
 import { Box } from '@mui/system';
 import { Link as LinkMaterial } from '@mui/material';

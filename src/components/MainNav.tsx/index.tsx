@@ -5,8 +5,12 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
-import { Link, useNavigate } from 'react-router-dom';
-import { logout } from '../../services/auth';
+import { useNavigate } from 'react-router-dom';
+import {
+  isAdminValidation,
+  isAuthenticated,
+  logout,
+} from '../../services/auth';
 
 import Diversity2Icon from '@mui/icons-material/Diversity2';
 import HomeIcon from '@mui/icons-material/Home';
@@ -15,21 +19,25 @@ import PostAddIcon from '@mui/icons-material/PostAdd';
 import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
 import SupportIcon from '@mui/icons-material/Support';
 import InfoIcon from '@mui/icons-material/Info';
-import { Icon } from '@mui/material';
+import { Icon, Link } from '@mui/material';
 
 const MainNav = () => {
   const userNav = [
-    { label: 'Página Inicial', to: '/', icon: <HomeIcon /> },
+    { label: 'Página Inicial', to: '/posts', icon: <HomeIcon /> },
     { label: 'Nova Publicação', to: '/novopost', icon: <PostAddIcon /> },
     {
       label: 'Minhas Publicações',
       to: '/myposts',
       icon: <LocalPostOfficeIcon />,
     },
-    { label: 'Ajuda', to: '/', icon: <SupportIcon /> },
-    { label: 'Sobre', to: '/', icon: <InfoIcon /> },
+    { label: 'Ajuda', to: '/help', icon: <SupportIcon /> },
+    { label: 'Sobre', to: '/about', icon: <InfoIcon /> },
   ];
 
+  const adminNav = [
+    { label: 'Página Inicial', to: '/admin', icon: <HomeIcon /> },
+    { label: 'SPAM', to: '/admin', icon: <PostAddIcon /> },
+  ];
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -37,6 +45,8 @@ const MainNav = () => {
     navigate('/');
   };
 
+  const navigationItems =
+    isAuthenticated() && isAdminValidation() ? adminNav : userNav;
   return (
     <div>
       <Toolbar>
@@ -49,8 +59,8 @@ const MainNav = () => {
       </Toolbar>
       {/* <Divider /> */}
       <List>
-        {userNav.map(({ label, to, icon }, index) => (
-          <Link key={index} to={to} style={{ textDecoration: 'none' }}>
+        {navigationItems.map(({ label, to, icon }, index) => (
+          <Link key={index} href={to} style={{ textDecoration: 'none' }}>
             <ListItem key={label} disablePadding>
               <ListItemButton>
                 <ListItemIcon>{icon}</ListItemIcon>

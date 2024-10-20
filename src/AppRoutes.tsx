@@ -46,8 +46,6 @@ const AppRoutes = () => {
       <Route element={<PublicRoute />}>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/sobre' element={<About />} />
-        <Route path='/ajuda' element={<Help />} />
         <Route path='/cadastrar' element={<SignUp />} />
         <Route path='*' element={<NotFound />} />
       </Route>
@@ -63,8 +61,8 @@ const AppRoutes = () => {
             <Route path='/post/:id' element={<Post />} />
             <Route path='/myposts' element={<MyPosts />} />
             <Route path='/novopost' element={<NewPosts />} />
-            <Route path='/sobre' element={<About />} />
-            <Route path='/ajuda' element={<Help />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/help' element={<Help />} />
           </>
         )}
         <Route path='*' element={<NotFound />} />

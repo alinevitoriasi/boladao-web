@@ -72,10 +72,11 @@ const Card = ({
         sx={{
           m: 3,
           marginTop: 0,
-          boxShadow: 0,
+          boxShadow: '5px 5px 10px #d0d0d0,-5px -5px 10px #f0f0f0',
           minWidth: 350,
           height: height,
           borderRadius: 3,
+          backgroundColor: '#FFFFFF',
           ...sx,
         }}
       >
