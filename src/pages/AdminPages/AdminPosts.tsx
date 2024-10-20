@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Box, CircularProgress, Grid, Typography } from '@mui/material';
 
-import Card from '../../components/Card';
 import api from '../../services/api';
 import Button from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +9,7 @@ import { useSnackbar } from 'notistack';
 import SelectComponent from '../../components/Select';
 import { useForm } from 'react-hook-form';
 import Input from '../../components/Input';
+import CardLink from '../../components/Card/CardLink';
 
 const AdminPage = () => {
   const navigate = useNavigate();
@@ -37,7 +37,6 @@ const AdminPage = () => {
       ...(data?.type && { type: data?.type ? data?.type?.join(',') : '' }),
       ...(data?.text && { text: data?.text }),
     });
-    console.log('onSubmit', params, data);
   };
 
   return (
@@ -154,8 +153,8 @@ const AdminPage = () => {
               data?.posts?.map((post: IPost) => {
                 return (
                   <Grid item key={post._id} md={6} sm={12}>
-                    <Card
-                      handleClick={() => navigate(`/admin/post/${post?._id}`)}
+                    <CardLink
+                      to={`/admin/post/${post?._id}`}
                       noAction
                       text={post.text}
                       author={post?.author?.username}

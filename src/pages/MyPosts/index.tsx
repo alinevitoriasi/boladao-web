@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { CircularProgress, Grid, Typography } from '@mui/material';
 
-import Card from '../../components/Card';
 import api from '../../services/api';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
@@ -11,6 +10,7 @@ import { useMutation, useQuery } from 'react-query';
 import { useSnackbar } from 'notistack';
 import TextBox from '../../components/TextBox';
 import { useForm } from 'react-hook-form';
+import CardLink from '../../components/Card/CardLink';
 
 const MyPosts = () => {
   const navigate = useNavigate();
@@ -150,10 +150,10 @@ const MyPosts = () => {
           {data?.map((post: IPost) => {
             return (
               <Grid item key={post._id} md={4} sm={12}>
-                <Card
+                <CardLink
                   height={350}
                   text={post.text}
-                  handleClick={() => navigate(`/post/${post?._id}`)}
+                  to={`/post/${post?._id}`}
                   handleEdit={() => {
                     setValue('text', post.text);
                     setModalEdit(true);

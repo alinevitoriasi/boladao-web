@@ -1,12 +1,12 @@
 import React from 'react';
 import { CircularProgress, Grid, Typography } from '@mui/material';
 
-import Card from '../../components/Card';
 import api from '../../services/api';
 import Button from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { useSnackbar } from 'notistack';
+import CardLink from '../../components/Card/CardLink';
 
 const Posts = () => {
   const navigate = useNavigate();
@@ -63,8 +63,8 @@ const Posts = () => {
           {data?.posts?.map((post: IPost) => {
             return (
               <Grid item key={post._id} md={8} sm={12}>
-                <Card
-                  handleClick={() => navigate(`/post/${post?._id}`)}
+                <CardLink
+                  to={`/post/${post?._id}`}
                   noAction
                   text={post.text}
                   author={post?.author?.username}

@@ -24,6 +24,12 @@ const AdminPost = () => {
     { retry: 0 }
   );
 
+  const { data: dataComments, refetch: commentRefetch } = useQuery(
+    'comments',
+    () => api.get(`/post/${id}/comments`).then((res) => res.data),
+    { retry: 0 }
+  );
+
   if (isError) {
     const errorData = error as any;
     const message = errorData?.response?.data?.message;
@@ -48,7 +54,31 @@ const AdminPost = () => {
       },
     }
   );
+  const [commentId, setCommentId] = useState('');
+
+  const { mutate: mutateReportComment } = useMutation(
+    () => {
+      return api.put('admin/comment/' + commentId);
+    },
+    {
+      onSuccess: () => {
+        refetch();
+        commentRefetch();
+        enqueueSnackbar('Atualizado com Sucesso!', {
+          variant: 'success',
+        });
+      },
+      onError: ({ response }: any) => {
+        enqueueSnackbar(response?.data?.message || 'Error', {
+          variant: 'error',
+        });
+      },
+    }
+  );
+
   const [modalReport, setModalReport] = useState(false);
+  const [modalReportComment, setModalReportComment] = useState(false);
+
   return (
     <>
       <Modal
@@ -58,6 +88,15 @@ const AdminPost = () => {
         setOpen={setModalReport}
         onSuccess={() => {
           mutateReport();
+        }}
+      />
+      <Modal
+        title='Reportar'
+        text='Tem certeza de que deseja mudar a visibilidade deste comentário?'
+        open={modalReportComment}
+        setOpen={setModalReportComment}
+        onSuccess={() => {
+          mutateReportComment();
         }}
       />
       <div
@@ -78,7 +117,6 @@ const AdminPost = () => {
               handleReport={() => {
                 setModalReport(true);
               }}
-              handleClick={() => null}
             />
           </Grid>
           <Grid item md={5} sm={12}>
@@ -130,7 +168,7 @@ const AdminPost = () => {
           </Grid>
         </Grid>
         <Grid item md={5} sm={12}>
-          {data?.comments?.length > 0 && (
+          {dataComments?.length > 0 && (
             <Typography
               variant='h5'
               className='title'
@@ -145,25 +183,27 @@ const AdminPost = () => {
             </Typography>
           )}
           <Box style={{ maxHeight: '80vh', overflow: 'auto' }}>
-            {data?.comments
+            {dataComments
               ?.map((comment: any, index: any): any => {
                 return (
                   <Card
+                    isAdmin
                     key={index}
-                    text={comment?.text}
+                    text={comment?.content}
                     author={comment?.username}
                     height={200}
                     noAction
-                    handleReport={(e) => {
-                      setModalReport(true);
+                    handleReport={() => {
+                      setModalReportComment(true);
+                      setCommentId(comment?._id);
                     }}
-                    handleClick={() => null}
+                    tags={[comment.isVisible ? 'Visível' : 'Oculto']}
                   />
                 );
               })
               .reverse()}
           </Box>
-          {data?.comments?.length === 0 && (
+          {dataComments?.length === 0 && (
             <Box
               style={{
                 height: '100%',

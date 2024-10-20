@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes, Navigate, Outlet } from 'react-router-dom';
-import { Box } from '@mui/material';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -43,28 +42,31 @@ const AppRoutes = () => {
 
   return (
     <Routes>
+      {/* Rotas Públicas */}
       <Route element={<PublicRoute />}>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/cadastrar' element={<SignUp />} />
         <Route path='*' element={<NotFound />} />
       </Route>
+
+      {/* Rotas Privadas */}
       <Route element={<PrivateRoute />}>
         <Route path='/posts' element={<Posts />} />
-        {isAdminValidation() ? (
+        <Route path='/about' element={<About />} />
+        <Route path='/help' element={<Help />} />
+        <Route path='/myposts' element={<MyPosts />} />
+        <Route path='/novopost' element={<NewPosts />} />
+        <Route path='/post/:id' element={<Post />} />
+
+        {/* Rotas Administrativas */}
+        {isAdminValidation() && (
           <>
             <Route path='/admin' element={<AdminPage />} />
             <Route path='/admin/post/:id' element={<AdminPost />} />
           </>
-        ) : (
-          <>
-            <Route path='/post/:id' element={<Post />} />
-            <Route path='/myposts' element={<MyPosts />} />
-            <Route path='/novopost' element={<NewPosts />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/help' element={<Help />} />
-          </>
         )}
+
         <Route path='*' element={<NotFound />} />
       </Route>
     </Routes>

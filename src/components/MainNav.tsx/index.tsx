@@ -5,7 +5,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   isAdminValidation,
   isAuthenticated,
@@ -19,7 +19,7 @@ import PostAddIcon from '@mui/icons-material/PostAdd';
 import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
 import SupportIcon from '@mui/icons-material/Support';
 import InfoIcon from '@mui/icons-material/Info';
-import { Icon, Link } from '@mui/material';
+import { Icon } from '@mui/material';
 
 const MainNav = () => {
   const userNav = [
@@ -60,7 +60,7 @@ const MainNav = () => {
       {/* <Divider /> */}
       <List>
         {navigationItems.map(({ label, to, icon }, index) => (
-          <Link key={index} href={to} style={{ textDecoration: 'none' }}>
+          <Link key={index} to={to} style={{ textDecoration: 'none' }}>
             <ListItem key={label} disablePadding>
               <ListItemButton>
                 <ListItemIcon>{icon}</ListItemIcon>

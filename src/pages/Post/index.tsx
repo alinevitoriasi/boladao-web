@@ -40,8 +40,6 @@ const Post = () => {
 
   const { mutate: mutateComment } = useMutation(
     (data: any) => {
-      console.log('teste', data);
-      // return null;
       return api.post('/comment', {
         content: data?.text,
         postId: id,
@@ -181,10 +179,8 @@ const Post = () => {
                   <Card
                     height={200}
                     key={index}
-                    handleClick={() => {}}
                     handleEdit={() => {
                       setModalEdit(true);
-                      console.log(comment);
                       setCommentId(comment._id);
                       setValue('editText', comment?.content);
                     }}

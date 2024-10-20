@@ -25,7 +25,6 @@ const NewPosts = () => {
   const [sucessMessage, setSuccessMessage] = useState(false);
 
   const onSubmit = async (data: IPostForm) => {
-    console.log('onSubmit', data);
     const newPost = {
       text: data?.text,
       date: data?.date,

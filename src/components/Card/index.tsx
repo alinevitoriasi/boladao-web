@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import {
   ButtonTypeMap,
-  CardActionArea,
   CardContent,
   CardActions,
   CardHeader,
@@ -36,7 +35,6 @@ interface ICard {
   handleEdit?: React.MouseEventHandler<HTMLButtonElement>;
   handleReport?: React.MouseEventHandler<HTMLButtonElement>;
   handleDelete?: React.MouseEventHandler<HTMLButtonElement>;
-  handleClick?: React.MouseEventHandler<HTMLButtonElement>;
   height?: number;
   alert?: boolean;
 }
@@ -50,7 +48,6 @@ const Card = ({
   handleEdit,
   handleReport,
   handleDelete,
-  handleClick,
   isAdmin,
   sx,
   height,
@@ -80,7 +77,7 @@ const Card = ({
           ...sx,
         }}
       >
-        <CardActionArea
+        <Box
           sx={{
             padding: 3,
             height: '100%',
@@ -88,8 +85,6 @@ const Card = ({
             alignItems: 'start',
             justifyContent: 'flex-start',
           }}
-          disabled={!handleClick}
-          onClick={handleClick}
         >
           <div style={{ width: '100%' }}>
             <CardHeader
@@ -116,17 +111,6 @@ const Card = ({
               }
               action={
                 <Box gap={2} display='flex'>
-                  {isAdmin && (
-                    <IconButton
-                      aria-label='report'
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        handleReport && handleReport(event);
-                      }}
-                    >
-                      <ReportIcon />
-                    </IconButton>
-                  )}
                   {!noAction && (
                     <>
                       <IconButton
@@ -152,9 +136,21 @@ const Card = ({
                   {tags?.length
                     ? tags.map((tag, index) => <Tag key={index} label={tag} />)
                     : ''}
+                  {isAdmin && (
+                    <IconButton
+                      aria-label='report'
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        handleReport && handleReport(event);
+                      }}
+                    >
+                      <ReportIcon />
+                    </IconButton>
+                  )}
                 </Box>
               }
             />
+
             <CardContent
               sx={{
                 paddingLeft: 2,
@@ -188,7 +184,7 @@ const Card = ({
               )}
             </CardActions>
           </div>
-        </CardActionArea>
+        </Box>
       </MUICard>
     </>
   );

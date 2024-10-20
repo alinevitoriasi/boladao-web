@@ -8,7 +8,6 @@ const HomeHeader = () => {
   const { pathname, hash } = useLocation();
   const color = 'white';
 
-  console.log(hash, pathname);
   return (
     <Box
       sx={{
