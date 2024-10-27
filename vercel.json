@@ -47,6 +47,10 @@
           {
             "key": "Feature-Policy",
             "value": "geolocation 'self'; microphone 'none'; camera 'none'"
+          },
+          {
+            "key": "Permissions-Policy",
+            "value": "geolocation=(self), microphone=(), camera=()"
           }
         ]
       },
