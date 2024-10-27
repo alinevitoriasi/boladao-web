@@ -18,9 +18,11 @@ import AccountBoxIcon from '@mui/icons-material/AccountCircle';
 import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 import ReportIcon from '@mui/icons-material/Report';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 import ShareModal from '../ShareModal';
 import Tag from '../Tag';
+import { Link } from 'react-router-dom';
 
 interface ICard {
   color?: ButtonTypeMap['props']['color'];
@@ -36,7 +38,8 @@ interface ICard {
   handleReport?: React.MouseEventHandler<HTMLButtonElement>;
   handleDelete?: React.MouseEventHandler<HTMLButtonElement>;
   height?: number;
-  alert?: boolean;
+  alert?: string;
+  to?: string;
 }
 
 const Card = ({
@@ -52,6 +55,7 @@ const Card = ({
   sx,
   height,
   alert,
+  to,
 }: ICard) => {
   const [modalView, setModalView] = useState(false);
   const tamanho = author && author?.length > 4 ? author?.length - 4 : 0;
@@ -113,6 +117,19 @@ const Card = ({
                 <Box gap={2} display='flex'>
                   {!noAction && (
                     <>
+                      {to && (
+                        <Link to={to}>
+                          <IconButton
+                            aria-label='settings'
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              handleEdit && handleEdit(event);
+                            }}
+                          >
+                            <VisibilityIcon />
+                          </IconButton>
+                        </Link>
+                      )}
                       <IconButton
                         aria-label='settings'
                         onClick={(event) => {
@@ -176,10 +193,8 @@ const Card = ({
             </CardContent>
             <CardActions>
               {alert && (
-                <Alert severity='warning'>
-                  Este post foi ocultado por conter conteúdo inadequado ou ser
-                  classificado como SPAM. Caso acredite que houve um engano,
-                  entre em contato com o suporte em: administrador@email.com
+                <Alert severity={alert?.includes('cvv') ? 'info' : 'warning'}>
+                  {alert}
                 </Alert>
               )}
             </CardActions>

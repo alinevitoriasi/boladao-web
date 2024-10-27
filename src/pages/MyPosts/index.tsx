@@ -10,7 +10,7 @@ import { useMutation, useQuery } from 'react-query';
 import { useSnackbar } from 'notistack';
 import TextBox from '../../components/TextBox';
 import { useForm } from 'react-hook-form';
-import CardLink from '../../components/Card/CardLink';
+import Card from '../../components/Card';
 
 const MyPosts = () => {
   const navigate = useNavigate();
@@ -149,11 +149,10 @@ const MyPosts = () => {
         <Grid container>
           {data?.map((post: IPost) => {
             return (
-              <Grid item key={post._id} md={4} sm={12}>
-                <CardLink
+              <Grid item key={post._id} md={6} sm={12}>
+                <Card
                   height={350}
                   text={post.text}
-                  to={`/post/${post?._id}`}
                   handleEdit={() => {
                     setValue('text', post.text);
                     setModalEdit(true);
@@ -164,6 +163,7 @@ const MyPosts = () => {
                     setPostId(post._id);
                   }}
                   alert={post.moderation}
+                  to={`/post/${post?._id}`}
                 />
               </Grid>
             );
