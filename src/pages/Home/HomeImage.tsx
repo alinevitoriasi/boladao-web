@@ -4,15 +4,14 @@ import Typography from '../../components/Typography/Typography';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 
-const backgroundImage =
-  'https://ouvidordigital.com.br/blog/wp-content/uploads/2022/03/2407778-dentro-do-post.jpg';
+import image from '../../assets/imagemprincipal.jpg';
 
 const HomeImage = () => {
   const navigate = useNavigate();
   return (
     <HomeLayout
       sxBackground={{
-        backgroundImage: `url(${backgroundImage})`,
+        backgroundImage: `url(${image})`,
         backgroundColor: '#EFF4FF',
         backgroundPosition: 'center',
         '::before': {
