@@ -28,18 +28,21 @@ const Login = () => {
     formState: { errors },
   } = useForm<ILogin>({ resolver: yupResolver(schemaLogin) });
 
-  const { mutate } = useMutation((data: ILogin) => api.post('/login', data), {
-    onSuccess: ({ data }: any) => {
-      setUser(data);
-      login(data.token, data.username, data.isAdmin);
-      data.isAdmin ? navigate('/admin') : navigate('/posts');
-    },
-    onError: ({ response }: any) => {
-      enqueueSnackbar(response?.data?.message || 'Error', {
-        variant: 'error',
-      });
-    },
-  });
+  const { mutate, isLoading } = useMutation(
+    (data: ILogin) => api.post('/login', data),
+    {
+      onSuccess: ({ data }: any) => {
+        setUser(data);
+        login(data.token, data.username, data.isAdmin);
+        data.isAdmin ? navigate('/admin') : navigate('/posts');
+      },
+      onError: ({ response }: any) => {
+        enqueueSnackbar(response?.data?.message || 'Error', {
+          variant: 'error',
+        });
+      },
+    }
+  );
 
   return (
     <>
@@ -81,7 +84,13 @@ const Login = () => {
               borderRadius: 2,
             }}
           />
-          <Button color='secondary' size='large' text='Entrar' type='submit' />
+          <Button
+            color='secondary'
+            size='large'
+            text='Entrar'
+            type='submit'
+            loading={isLoading}
+          />
         </form>
       </AppForm>
       <AppFooter />

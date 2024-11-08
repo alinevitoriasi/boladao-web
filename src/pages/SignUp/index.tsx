@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
@@ -26,18 +26,21 @@ const SignUp = () => {
     resolver: yupResolver(schemaSignUp),
   });
 
+  const [isLoading, setLoading] = useState(false);
   const onSubmit = async (data: ISignUp) => {
     try {
+      setLoading(true);
       await api.post('/users', data);
       const response = await api.post('/login', {
         email: data?.email,
         password: data?.password,
       });
-
+      setLoading(false);
       login(response?.data?.token, data?.username);
       navigate('/posts');
       enqueueSnackbar('Cadastrado com sucesso!', { variant: 'success' });
     } catch (error: any) {
+      setLoading(false);
       if (error?.response) {
         enqueueSnackbar(error.response.data?.message, { variant: 'error' });
       } else {
@@ -112,15 +115,20 @@ const SignUp = () => {
             type='password'
             sx={{
               width: '100%',
-              marginBottom: 2,
+              marginBottom: 1,
               borderRadius: 2,
             }}
           />
+          <Typography variant='caption' paragraph>
+            Ao cadastrar, você concorda com os{' '}
+            <a href='/terms'>termos e condições</a>
+          </Typography>
           <Button
             type='submit'
             color='secondary'
             size='large'
             text='Cadastrar'
+            loading={isLoading}
           />
         </form>
       </AppForm>
