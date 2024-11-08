@@ -17,6 +17,7 @@ import ResponsiveDrawer from './components/DashboardLayout/DashboardLayout';
 import AppBar from './components/AppBar';
 import About from './pages/About';
 import Help from './pages/Help';
+import Terms from './pages/Footer/Terms';
 
 const AppRoutes = () => {
   const PrivateRoute = (): JSX.Element => {
@@ -29,14 +30,14 @@ const AppRoutes = () => {
 
   const PublicRoute = (): JSX.Element => {
     return (
-      <>
+      <div style={{ height: '100vh' }}>
         <AppBar />
         {!isAuthenticated() ? (
           <Outlet />
         ) : (
           <Navigate to={isAdminValidation() ? '/admin' : '/posts'} />
         )}{' '}
-      </>
+      </div>
     );
   };
 
@@ -47,6 +48,7 @@ const AppRoutes = () => {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/cadastrar' element={<SignUp />} />
+        <Route path='/terms' element={<Terms />} />
         <Route path='*' element={<NotFound />} />
       </Route>
 
