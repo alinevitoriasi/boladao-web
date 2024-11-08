@@ -36,7 +36,7 @@ const MainNav = () => {
 
   const adminNav = [
     { label: 'Página Inicial', to: '/admin', icon: <HomeIcon /> },
-    { label: 'SPAM', to: '/admin', icon: <PostAddIcon /> },
+    // { label: 'SPAM', to: '/admin', icon: <PostAddIcon /> },
   ];
   const navigate = useNavigate();
 

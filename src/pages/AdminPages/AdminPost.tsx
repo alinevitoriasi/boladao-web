@@ -155,7 +155,7 @@ const AdminPost = () => {
                   onClick={() => {
                     setValue(
                       'text',
-                      'Este post foi ocultado por necessitar de apoio ou assistência. Recomendamos entrar em contato com o CVV (Centro de Valorização da Vida) pelo site cvv.org.br ou pelo telefone 188. Caso acredite que houve um engano, entre em contato com o suporte em: administrador@email.com'
+                      'Esta publicação foi ocultada por necessitar de apoio ou assistência. Recomendamos entrar em contato com o CVV (Centro de Valorização da Vida) pelo site cvv.org.br ou pelo telefone 188. Caso acredite que houve um engano, entre em contato com o suporte em: administrador@email.com'
                     );
                   }}
                 >
@@ -168,7 +168,7 @@ const AdminPost = () => {
                   onClick={() => {
                     setValue(
                       'text',
-                      'Este post foi ocultado por necessitar de apoio ou assistência. Recomendamos entrar em contato com o CVV (Centro de Valorização da Vida) pelo site cvv.org.br ou pelo telefone 188. Caso acredite que houve um engano, entre em contato com o suporte em: administrador@email.com'
+                      'Esta publicação foi ocultada por necessitar de apoio ou assistência. Recomendamos entrar em contato com o CVV (Centro de Valorização da Vida) pelo site cvv.org.br ou pelo telefone 188. Caso acredite que houve um engano, entre em contato com o suporte em: administrador@email.com'
                     );
                   }}
                 >
@@ -217,7 +217,6 @@ const AdminPost = () => {
               isAdmin
               noAction
               text={data?.text}
-              author={data?.author?.username}
               sx={{ m: 0, marginBottom: 10, minHeight: 400 }}
               handleReport={() => {
                 setModalReport(true);
